@@ -1,0 +1,87 @@
+# Default configuration for 3D Cutting Stock Optimization
+# 2026 "亿星软件杯" Mathematical Modeling Competition - Problem A
+
+random_seed: 20260528
+
+# Problem data
+materials:
+  L01:
+    length: 300
+    width: 200
+    height: 150
+    count: 5
+  L02:
+    length: 250
+    width: 150
+    height: 100
+    count: 5
+  L03:
+    length: 200
+    width: 150
+    height: 80
+    count: 5
+
+pieces:
+  J01: {length: 40, width: 40, height: 40, profit: 620}
+  J02: {length: 50, width: 40, height: 40, profit: 780}
+  J03: {length: 60, width: 50, height: 30, profit: 880}
+  J04: {length: 75, width: 60, height: 40, profit: 1850}
+  J05: {length: 80, width: 60, height: 50, profit: 2520}
+  J06: {length: 100, width: 50, height: 20, profit: 1000}
+  J07: {length: 120, width: 20, height: 20, profit: 540}
+
+# GCD for grid normalization
+grid_gcd: 5
+
+# Extreme point packing parameters
+extreme_point:
+  alpha: 1.0       # volume fill weight
+  beta: 0.5        # profit density weight
+  gamma: 0.3       # contact score weight
+  eta: 0.1         # fragmentation penalty weight
+  beam_width: 5    # number of top candidates to keep per step
+  random_restarts: 10
+
+# Pattern generation
+pattern_generation:
+  max_patterns_per_material: 200
+  min_utilization: 0.5
+  grid_patterns: true
+  greedy_patterns: true
+  extreme_point_patterns: true
+
+# CP-SAT validation
+cp_sat:
+  time_limit_seconds: 30
+  num_workers: 4
+  enable_validation: true
+
+# Master problem solving
+master:
+  time_limit_seconds: 120
+  num_workers: 4
+  solver: "cp-sat"  # cp-sat or mip
+
+# Problem-specific settings
+problem1:
+  objective: "maximize_utilization"
+
+problem2:
+  objective: "maximize_profit"
+  min_pieces_per_type: 10
+
+# Visualization
+plotting:
+  dpi: 300
+  formats: ["png", "pdf"]
+  font_family: "sans-serif"
+  figure_width: 10
+  figure_height: 6
+
+# Output paths
+output:
+  results_dir: "outputs/results"
+  figures_dir: "outputs/figures"
+  tables_dir: "outputs/tables"
+  reports_dir: "outputs/reports"
+  logs_dir: "logs"

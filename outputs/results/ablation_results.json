@@ -1,0 +1,46 @@
+{
+  "only_grid_patterns": {
+    "experiment": "only_grid_patterns",
+    "utilization": 0.9900990099009901,
+    "waste": 750000,
+    "profit": 733000,
+    "runtime": 0.04129505157470703,
+    "num_patterns": 145,
+    "status": "OPTIMAL",
+    "gap": 0.0,
+    "solve_time": 0.015692710876464844
+  },
+  "greedy_without_extreme_points": {
+    "experiment": "greedy_without_extreme_points",
+    "utilization": 0.9900990099009901,
+    "waste": 750000,
+    "profit": 733000,
+    "runtime": 52.122655391693115,
+    "num_patterns": 148,
+    "status": "OPTIMAL",
+    "gap": 0.0,
+    "solve_time": 0.009937286376953125
+  },
+  "extreme_points_without_random_restart": {
+    "experiment": "extreme_points_without_random_restart",
+    "utilization": 0.9900990099009901,
+    "waste": 750000,
+    "profit": 733000,
+    "runtime": 52.36972403526306,
+    "num_patterns": 151,
+    "status": "OPTIMAL",
+    "gap": 0.0,
+    "solve_time": 0.015805482864379883
+  },
+  "full_hybrid_solver": {
+    "experiment": "full_hybrid_solver",
+    "utilization": 0.9900990099009901,
+    "waste": 750000,
+    "profit": 733000,
+    "runtime": 57.76026129722595,
+    "num_patterns": 178,
+    "status": "OPTIMAL",
+    "gap": 0.0,
+    "solve_time": 0.020449161529541016
+  }
+}

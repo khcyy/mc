@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# Conda
+.env_conda/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude
+.claude/

@@ -1,0 +1,10 @@
+# Problem 1 configuration: Maximize material utilization
+extends: "default.yaml"
+
+problem: "problem1"
+objective: "maximize_utilization"
+
+master:
+  time_limit_seconds: 120
+  num_workers: 4
+  solver: "cp-sat"

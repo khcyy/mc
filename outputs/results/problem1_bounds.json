@@ -1,0 +1,10 @@
+{
+  "total_material_volume": 75750000,
+  "solution_used_volume": 75000000,
+  "solution_waste_volume": 750000,
+  "waste_percentage": 0.9900990099009901,
+  "utilization_percentage": 99.00990099009901,
+  "upper_bound_waste": 0.0,
+  "lower_bound_waste": 750000,
+  "gap_waste": 1.0
+}

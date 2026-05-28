@@ -1,0 +1,7 @@
+# Plotting configuration
+dpi: 300
+formats: ["png", "pdf"]
+font_family: "sans-serif"
+figure_width: 10
+figure_height: 6
+color_palette: "Set2"

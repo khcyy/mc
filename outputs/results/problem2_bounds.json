@@ -1,0 +1,10 @@
+{
+  "total_material_volume": 75750000,
+  "solution_used_volume": 72512000,
+  "solution_waste_volume": 3238000,
+  "waste_percentage": 4.2745874587458745,
+  "utilization_percentage": 95.72541254125413,
+  "upper_bound_profit": 852187.5,
+  "lower_bound_profit": 745680,
+  "gap_profit": 0.12498129812981298
+}

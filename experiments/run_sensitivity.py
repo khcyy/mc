@@ -14,7 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from src.cutting3d.data import load_config, create_materials, create_pieces
 from src.cutting3d.orientations import generate_all_orientations
 from src.cutting3d.pattern_generator import generate_all_patterns
-from src.cutting3d.master_solver import solve_master_problem1
+from src.cutting3d.master_solver import solve_master_problem1, solve_master_problem2
 from src.cutting3d.visualization import plot_sensitivity_patterns, plot_sensitivity_weights
 from src.cutting3d.logging_utils import setup_logging, log_versions
 from src.cutting3d.utils import ensure_dir
@@ -160,49 +160,136 @@ def main():
     except Exception as e:
         logger.error(f"Weight sensitivity failed: {e}", exc_info=True)
 
+    # Problem 2 sensitivity
+    p2_pattern_results = {}
+    p2_weight_results = []
+    try:
+        logger.info("\nRunning Problem 2 sensitivity...")
+        p2_pattern_results, p2_weight_results, _ = _run_problem2_sensitivity(
+            config, materials, pieces, all_orientations, logger
+        )
+    except Exception as e:
+        logger.error(f"Problem 2 sensitivity failed: {e}", exc_info=True)
+
     # Save combined CSV
-    _save_sensitivity_csv(pattern_results, weight_results, weight_names, logger)
+    _save_sensitivity_csv(pattern_results, weight_results, weight_names,
+                          p2_pattern_results, p2_weight_results, logger)
 
     logger.info("Sensitivity analysis completed.")
 
 
-def _save_sensitivity_csv(pattern_results, weight_results, weight_names, logger) -> None:
+def _run_problem2_sensitivity(config, materials, pieces, all_orientations, logger):
+    """Run sensitivity for problem 2."""
+    p2_config = dict(config)
+    p2_config["objective"] = "maximize_profit"
+    p2_config["min_pieces_per_type"] = 10
+
+    pattern_counts = [20, 50, 100, 150, 200]
+    p2_pattern_results = {}
+
+    for max_pat in pattern_counts:
+        cfg = copy.deepcopy(p2_config)
+        cfg["pattern_generation"]["max_patterns_per_material"] = max_pat
+        start = time.time()
+        patterns = generate_all_patterns(materials, pieces, all_orientations, cfg)
+        solution = solve_master_problem2(materials, pieces, patterns, cfg)
+        runtime = time.time() - start
+        total_vol = sum(m.volume * m.count for m in materials.values())
+        p2_pattern_results[max_pat] = {
+            "utilization": solution.total_used_volume / total_vol if total_vol > 0 else 0.0,
+            "waste": solution.total_waste_volume,
+            "profit": solution.total_profit,
+            "runtime": runtime,
+            "num_patterns": sum(len(v) for v in patterns.values()),
+            "status": solution.status.value,
+            "gap": solution.gap,
+        }
+        logger.info(f"  P2 max patterns {max_pat}: profit={solution.total_profit}, gap={solution.gap*100:.2f}%, runtime={runtime:.2f}s")
+
+    weight_configs = [
+        {"name": "default", "alpha": 1.0, "beta": 0.5, "gamma": 0.3, "eta": 0.1},
+        {"name": "volume_only", "alpha": 1.0, "beta": 0.0, "gamma": 0.0, "eta": 0.0},
+        {"name": "profit_only", "alpha": 0.0, "beta": 1.0, "gamma": 0.0, "eta": 0.0},
+        {"name": "balanced", "alpha": 0.5, "beta": 0.5, "gamma": 0.2, "eta": 0.05},
+        {"name": "contact_heavy", "alpha": 0.3, "beta": 0.3, "gamma": 0.8, "eta": 0.05},
+    ]
+    p2_weight_results = []
+    p2_weight_names = []
+
+    for wc in weight_configs:
+        cfg = copy.deepcopy(p2_config)
+        cfg["extreme_point"]["alpha"] = wc["alpha"]
+        cfg["extreme_point"]["beta"] = wc["beta"]
+        cfg["extreme_point"]["gamma"] = wc["gamma"]
+        cfg["extreme_point"]["eta"] = wc["eta"]
+        start = time.time()
+        patterns = generate_all_patterns(materials, pieces, all_orientations, cfg)
+        solution = solve_master_problem2(materials, pieces, patterns, cfg)
+        runtime = time.time() - start
+        total_vol = sum(m.volume * m.count for m in materials.values())
+        p2_weight_results.append({
+            "name": wc["name"],
+            "utilization": solution.total_used_volume / total_vol if total_vol > 0 else 0.0,
+            "waste": solution.total_waste_volume,
+            "profit": solution.total_profit,
+            "runtime": runtime,
+            "status": solution.status.value,
+            "gap": solution.gap,
+        })
+        p2_weight_names.append(wc["name"])
+        logger.info(f"  P2 weights {wc['name']}: profit={solution.total_profit}, gap={solution.gap*100:.2f}%, runtime={runtime:.2f}s")
+
+    return p2_pattern_results, p2_weight_results, p2_weight_names
+
+
+def _save_sensitivity_csv(pattern_results, weight_results, weight_names,
+                          p2_pattern_results=None, p2_weight_results=None, logger=None) -> None:
     """Save combined sensitivity results to CSV."""
     import csv
     csv_path = Path("outputs/results/sensitivity_results.csv")
     fieldnames = [
         "parameter_name", "parameter_value", "problem_name",
         "objective_value", "total_profit", "material_utilization",
-        "total_waste_volume", "runtime", "total_patterns_generated",
+        "total_waste_volume", "gap", "runtime", "total_patterns_generated",
     ]
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
-        for max_pat, r in pattern_results.items():
-            writer.writerow({
-                "parameter_name": "max_patterns_per_material",
-                "parameter_value": max_pat,
-                "problem_name": "problem1",
-                "objective_value": r.get("waste", 0),
-                "total_profit": r.get("profit", 0),
-                "material_utilization": r.get("utilization", 0),
-                "total_waste_volume": r.get("waste", 0),
-                "runtime": r.get("runtime", 0),
-                "total_patterns_generated": r.get("num_patterns", 0),
-            })
-        for i, r in enumerate(weight_results):
-            writer.writerow({
-                "parameter_name": "scoring_weights",
-                "parameter_value": weight_names[i] if i < len(weight_names) else f"config_{i}",
-                "problem_name": "problem1",
-                "objective_value": r.get("waste", 0),
-                "total_profit": r.get("profit", 0),
-                "material_utilization": r.get("utilization", 0),
-                "total_waste_volume": r.get("waste", 0),
-                "runtime": r.get("runtime", 0),
-                "total_patterns_generated": 0,
-            })
-    logger.info(f"Sensitivity CSV saved: {csv_path}")
+
+        def _write_rows(prob_name, pattern_dict, weight_list, weight_name_list):
+            for max_pat, r in pattern_dict.items():
+                writer.writerow({
+                    "parameter_name": "max_patterns_per_material",
+                    "parameter_value": max_pat,
+                    "problem_name": prob_name,
+                    "objective_value": r.get("waste", 0) if prob_name == "problem1" else r.get("profit", 0),
+                    "total_profit": r.get("profit", 0),
+                    "material_utilization": r.get("utilization", 0),
+                    "total_waste_volume": r.get("waste", 0),
+                    "gap": r.get("gap", 0),
+                    "runtime": r.get("runtime", 0),
+                    "total_patterns_generated": r.get("num_patterns", 0),
+                })
+            for i, r in enumerate(weight_list):
+                writer.writerow({
+                    "parameter_name": "scoring_weights",
+                    "parameter_value": weight_name_list[i] if i < len(weight_name_list) else f"config_{i}",
+                    "problem_name": prob_name,
+                    "objective_value": r.get("waste", 0) if prob_name == "problem1" else r.get("profit", 0),
+                    "total_profit": r.get("profit", 0),
+                    "material_utilization": r.get("utilization", 0),
+                    "total_waste_volume": r.get("waste", 0),
+                    "gap": r.get("gap", 0),
+                    "runtime": r.get("runtime", 0),
+                    "total_patterns_generated": r.get("num_patterns", 0),
+                })
+
+        _write_rows("problem1", pattern_results, weight_results, weight_names)
+        if p2_pattern_results:
+            _write_rows("problem2", p2_pattern_results, p2_weight_results or [], [])
+
+    if logger:
+        logger.info(f"Sensitivity CSV saved: {csv_path}")
 
 
 if __name__ == "__main__":

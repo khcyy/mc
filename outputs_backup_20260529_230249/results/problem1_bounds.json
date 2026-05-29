@@ -1,0 +1,17 @@
+{
+  "total_material_volume": 75750000,
+  "total_used_volume": 75000000,
+  "total_waste_volume": 750000,
+  "material_utilization": 0.9900990099009901,
+  "waste_lower_bound": 0,
+  "current_waste": 750000,
+  "waste_gap_to_zero": 750000,
+  "waste_gap_ratio_to_total_volume": 0.009900990099009901,
+  "utilization_upper_bound": 1.0,
+  "current_utilization": 0.9900990099009901,
+  "utilization_gap_to_full": 0.00990099009900991,
+  "bound_note": "Problem 1 minimizes waste. waste_lower_bound=0 is the theoretical minimum. utilization_upper_bound=1.0 is 100% utilization. The gap is the distance from the theoretical bound.",
+  "problem_type": "maximize_utilization",
+  "solution_status": "OPTIMAL",
+  "solution_objective_value": 750000.0
+}

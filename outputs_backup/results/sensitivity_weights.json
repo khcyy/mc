@@ -1,0 +1,42 @@
+[
+  {
+    "name": "default",
+    "utilization": 0.9900990099009901,
+    "waste": 750000,
+    "profit": 733000,
+    "runtime": 1.9424402713775635,
+    "status": "OPTIMAL"
+  },
+  {
+    "name": "volume_only",
+    "utilization": 0.9900990099009901,
+    "waste": 750000,
+    "profit": 733000,
+    "runtime": 1.5666782855987549,
+    "status": "OPTIMAL"
+  },
+  {
+    "name": "profit_only",
+    "utilization": 0.9900990099009901,
+    "waste": 750000,
+    "profit": 733000,
+    "runtime": 2.1993446350097656,
+    "status": "OPTIMAL"
+  },
+  {
+    "name": "balanced",
+    "utilization": 0.9900990099009901,
+    "waste": 750000,
+    "profit": 733000,
+    "runtime": 2.0844531059265137,
+    "status": "OPTIMAL"
+  },
+  {
+    "name": "contact_heavy",
+    "utilization": 0.9900990099009901,
+    "waste": 750000,
+    "profit": 733000,
+    "runtime": 2.7561299800872803,
+    "status": "OPTIMAL"
+  }
+]

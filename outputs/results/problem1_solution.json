@@ -22,14 +22,14 @@
       "J06": 0,
       "J07": 0
     },
-    "solve_time_seconds": 0.1585392951965332,
+    "solve_time_seconds": 0.019777774810791016,
     "upper_bound": 1.0,
     "lower_bound": 0.9900990099009901,
     "gap": 0.00990099009900991,
     "metadata": {
       "timing": {
-        "pattern_generation_time": 93.56412434577942,
-        "master_solve_time": 93.77137231826782
+        "pattern_generation_time": 90.20236992835999,
+        "master_solve_time": 90.23886847496033
       }
     }
   },

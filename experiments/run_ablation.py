@@ -84,7 +84,9 @@ def run_ablation_experiment(
         "waste": solution.total_waste_volume,
         "profit": solution.total_profit,
         "runtime": runtime,
-        "num_patterns": sum(len(v) for v in patterns.values()),
+        "total_used_volume": solution.total_used_volume,
+        "num_patterns_generated": sum(len(v) for v in patterns.values()),
+        "num_patterns_used": len(solution.pattern_usage),
         "status": solution.status.value,
         "gap": solution.gap,
         "solve_time": solution.solve_time_seconds,
@@ -140,8 +142,12 @@ def main():
                 "waste": 0,
                 "profit": 0,
                 "runtime": 0,
-                "num_patterns": 0,
+                "total_used_volume": 0,
+                "num_patterns_generated": 0,
+                "num_patterns_used": 0,
                 "status": "FAILED",
+                "gap": 0,
+                "solve_time": 0,
                 "error": str(e),
             }
 
@@ -184,15 +190,15 @@ def _save_ablation_csv(results: dict, logger) -> None:
                 "problem_name": "problem1",
                 "status": r.get("status", ""),
                 "total_profit": r.get("profit", 0),
-                "total_used_volume": 0,
+                "total_used_volume": r.get("total_used_volume", 0),
                 "total_waste_volume": r.get("waste", 0),
                 "material_utilization": r.get("utilization", 0),
                 "gap_metric": r.get("gap", 0),
                 "total_runtime": r.get("runtime", 0),
                 "pattern_generation_time": 0,
                 "master_solve_time": r.get("solve_time", 0),
-                "total_patterns_generated": r.get("num_patterns", 0),
-                "num_patterns_used": 0,
+                "total_patterns_generated": r.get("num_patterns_generated", 0),
+                "num_patterns_used": r.get("num_patterns_used", 0),
             })
     logger.info(f"Ablation CSV saved: {csv_path}")
 

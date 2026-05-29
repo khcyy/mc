@@ -1,0 +1,57 @@
+{
+  "only_grid_patterns": {
+    "experiment": "only_grid_patterns",
+    "utilization": 0.9900990099009901,
+    "waste": 750000,
+    "profit": 733000,
+    "runtime": 0.048705339431762695,
+    "num_patterns": 145,
+    "status": "OPTIMAL",
+    "gap": 0.00990099009900991,
+    "solve_time": 0.03337883949279785
+  },
+  "legacy_greedy_without_extreme_points": {
+    "experiment": "legacy_greedy_without_extreme_points",
+    "utilization": 0.9900990099009901,
+    "waste": 750000,
+    "profit": 733000,
+    "runtime": 90.65609931945801,
+    "num_patterns": 148,
+    "status": "OPTIMAL",
+    "gap": 0.00990099009900991,
+    "solve_time": 0.011039018630981445
+  },
+  "improved_greedy_without_extreme_points": {
+    "experiment": "improved_greedy_without_extreme_points",
+    "utilization": 0.9900990099009901,
+    "waste": 750000,
+    "profit": 733000,
+    "runtime": 0.13714146614074707,
+    "num_patterns": 147,
+    "status": "OPTIMAL",
+    "gap": 0.00990099009900991,
+    "solve_time": 0.011337518692016602
+  },
+  "extreme_points_without_random_restart": {
+    "experiment": "extreme_points_without_random_restart",
+    "utilization": 0.9900990099009901,
+    "waste": 750000,
+    "profit": 733000,
+    "runtime": 86.94128561019897,
+    "num_patterns": 151,
+    "status": "OPTIMAL",
+    "gap": 0.00990099009900991,
+    "solve_time": 0.010670185089111328
+  },
+  "full_hybrid_solver": {
+    "experiment": "full_hybrid_solver",
+    "utilization": 0.9900990099009901,
+    "waste": 750000,
+    "profit": 733000,
+    "runtime": 76.6139485836029,
+    "num_patterns": 178,
+    "status": "OPTIMAL",
+    "gap": 0.00990099009900991,
+    "solve_time": 0.010568380355834961
+  }
+}

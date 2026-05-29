@@ -1,0 +1,19 @@
+{
+  "best_used_volume": 3600000,
+  "best_waste_volume": 150000,
+  "best_utilization": 0.96,
+  "found_better_than_current": false,
+  "current_baseline_used_volume": 3600000,
+  "current_baseline_utilization": 0.96,
+  "num_patterns_checked": 736,
+  "num_valid_patterns": 200,
+  "search_configs": {
+    "strategies": [
+      "grid",
+      "improved_greedy",
+      "extreme_point_intensive",
+      "ep_alt_weights"
+    ]
+  },
+  "runtime_seconds": 5.3593316078186035
+}

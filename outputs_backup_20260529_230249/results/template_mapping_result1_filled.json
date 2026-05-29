@@ -1,0 +1,51 @@
+{
+  "template": "outputs\\results\\result1.xlsx",
+  "sheets": {
+    "Sheet1": {
+      "data_cells": 105,
+      "material_rows": {
+        "L01": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "L02": [
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        "L03": [
+          14,
+          15,
+          16,
+          17,
+          18
+        ]
+      },
+      "piece_columns": {
+        "J01": 3,
+        "J02": 4,
+        "J03": 5,
+        "J04": 6,
+        "J05": 7,
+        "J06": 8,
+        "J07": 9
+      }
+    },
+    "Sheet2": {
+      "data_cells": 0,
+      "material_rows": {},
+      "piece_columns": {}
+    },
+    "Sheet3": {
+      "data_cells": 0,
+      "material_rows": {},
+      "piece_columns": {}
+    }
+  },
+  "data_cells": []
+}

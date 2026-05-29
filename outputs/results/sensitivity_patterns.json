@@ -3,15 +3,15 @@
     "utilization": 0.9742574257425742,
     "waste": 1950000,
     "profit": 749000,
-    "runtime": 39.468589544296265,
+    "runtime": 20.87669014930725,
     "num_patterns": 42,
     "status": "OPTIMAL"
   },
   "50": {
-    "utilization": 0.9742574257425742,
-    "waste": 1950000,
-    "profit": 749000,
-    "runtime": 80.02022528648376,
+    "utilization": 0.9762376237623762,
+    "waste": 1800000,
+    "profit": 736200,
+    "runtime": 77.06071424484253,
     "num_patterns": 75,
     "status": "OPTIMAL"
   },
@@ -19,7 +19,7 @@
     "utilization": 0.9742574257425742,
     "waste": 1950000,
     "profit": 749000,
-    "runtime": 90.61122298240662,
+    "runtime": 81.79004287719727,
     "num_patterns": 117,
     "status": "OPTIMAL"
   },
@@ -27,7 +27,7 @@
     "utilization": 0.9900990099009901,
     "waste": 750000,
     "profit": 733000,
-    "runtime": 82.09272003173828,
+    "runtime": 81.55947875976562,
     "num_patterns": 155,
     "status": "OPTIMAL"
   },
@@ -35,7 +35,7 @@
     "utilization": 0.9900990099009901,
     "waste": 750000,
     "profit": 733000,
-    "runtime": 92.66177248954773,
+    "runtime": 87.80199003219604,
     "num_patterns": 178,
     "status": "OPTIMAL"
   }

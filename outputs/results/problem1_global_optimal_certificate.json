@@ -1,0 +1,17 @@
+{
+  "status": "PATTERN_LIBRARY_OPTIMAL",
+  "objective_waste": 750000,
+  "total_used_volume": 75000000,
+  "total_material_volume": 75750000,
+  "material_utilization": 0.9900990099009901,
+  "utilization_upper_bound": 1.0,
+  "utilization_gap_to_full": 0.00990099009900991,
+  "best_bound": 1.0,
+  "gap": 0.00990099009900991,
+  "pattern_library_complete": false,
+  "global_optimal_proved": false,
+  "proof_explanation": "NOT PROVED. L01 (100%) and L03 (100%) fully utilized. L02 at 3,600,000/block (96%). To prove global optimal, must show L02 cannot exceed 3,600,000. L02 infeasibility certificate not completed. Solution is pattern-library optimal with strong empirical support.",
+  "l01_max_used": 45000000,
+  "l02_max_used": 18000000,
+  "l03_max_used": 12000000
+}

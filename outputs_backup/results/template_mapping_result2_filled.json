@@ -1,0 +1,963 @@
+{
+  "template": "outputs\\results\\result2.xlsx",
+  "sheets": {
+    "Sheet1": {
+      "grey_cell_count": 105,
+      "grey_cells": [
+        {
+          "row": 4,
+          "col": 3,
+          "col_letter": "C",
+          "coordinate": "C4",
+          "value": null,
+          "adjacent_label": "L01",
+          "column_header": "J01"
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "col_letter": "D",
+          "coordinate": "D4",
+          "value": null,
+          "adjacent_label": "L01",
+          "column_header": "J02"
+        },
+        {
+          "row": 4,
+          "col": 5,
+          "col_letter": "E",
+          "coordinate": "E4",
+          "value": null,
+          "adjacent_label": "L01",
+          "column_header": "J03"
+        },
+        {
+          "row": 4,
+          "col": 6,
+          "col_letter": "F",
+          "coordinate": "F4",
+          "value": null,
+          "adjacent_label": "J04",
+          "column_header": "J04"
+        },
+        {
+          "row": 4,
+          "col": 7,
+          "col_letter": "G",
+          "coordinate": "G4",
+          "value": null,
+          "adjacent_label": "J05",
+          "column_header": "J05"
+        },
+        {
+          "row": 4,
+          "col": 8,
+          "col_letter": "H",
+          "coordinate": "H4",
+          "value": null,
+          "adjacent_label": "J06",
+          "column_header": "J06"
+        },
+        {
+          "row": 4,
+          "col": 9,
+          "col_letter": "I",
+          "coordinate": "I4",
+          "value": null,
+          "adjacent_label": "J07",
+          "column_header": "J07"
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "col_letter": "C",
+          "coordinate": "C5",
+          "value": null,
+          "adjacent_label": "L01",
+          "column_header": "J01"
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "col_letter": "D",
+          "coordinate": "D5",
+          "value": null,
+          "adjacent_label": "L01",
+          "column_header": "J02"
+        },
+        {
+          "row": 5,
+          "col": 5,
+          "col_letter": "E",
+          "coordinate": "E5",
+          "value": null,
+          "adjacent_label": "L01",
+          "column_header": "J03"
+        },
+        {
+          "row": 5,
+          "col": 6,
+          "col_letter": "F",
+          "coordinate": "F5",
+          "value": null,
+          "adjacent_label": "J04",
+          "column_header": "J04"
+        },
+        {
+          "row": 5,
+          "col": 7,
+          "col_letter": "G",
+          "coordinate": "G5",
+          "value": null,
+          "adjacent_label": "J05",
+          "column_header": "J05"
+        },
+        {
+          "row": 5,
+          "col": 8,
+          "col_letter": "H",
+          "coordinate": "H5",
+          "value": null,
+          "adjacent_label": "J06",
+          "column_header": "J06"
+        },
+        {
+          "row": 5,
+          "col": 9,
+          "col_letter": "I",
+          "coordinate": "I5",
+          "value": null,
+          "adjacent_label": "J07",
+          "column_header": "J07"
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "col_letter": "C",
+          "coordinate": "C6",
+          "value": null,
+          "adjacent_label": "L01",
+          "column_header": "J01"
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "col_letter": "D",
+          "coordinate": "D6",
+          "value": null,
+          "adjacent_label": "L01",
+          "column_header": "J02"
+        },
+        {
+          "row": 6,
+          "col": 5,
+          "col_letter": "E",
+          "coordinate": "E6",
+          "value": null,
+          "adjacent_label": "L01",
+          "column_header": "J03"
+        },
+        {
+          "row": 6,
+          "col": 6,
+          "col_letter": "F",
+          "coordinate": "F6",
+          "value": null,
+          "adjacent_label": "J04",
+          "column_header": "J04"
+        },
+        {
+          "row": 6,
+          "col": 7,
+          "col_letter": "G",
+          "coordinate": "G6",
+          "value": null,
+          "adjacent_label": "J05",
+          "column_header": "J05"
+        },
+        {
+          "row": 6,
+          "col": 8,
+          "col_letter": "H",
+          "coordinate": "H6",
+          "value": null,
+          "adjacent_label": "J06",
+          "column_header": "J06"
+        },
+        {
+          "row": 6,
+          "col": 9,
+          "col_letter": "I",
+          "coordinate": "I6",
+          "value": null,
+          "adjacent_label": "J07",
+          "column_header": "J07"
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "col_letter": "C",
+          "coordinate": "C7",
+          "value": null,
+          "adjacent_label": "L01",
+          "column_header": "J01"
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "col_letter": "D",
+          "coordinate": "D7",
+          "value": null,
+          "adjacent_label": "L01",
+          "column_header": "J02"
+        },
+        {
+          "row": 7,
+          "col": 5,
+          "col_letter": "E",
+          "coordinate": "E7",
+          "value": null,
+          "adjacent_label": "L01",
+          "column_header": "J03"
+        },
+        {
+          "row": 7,
+          "col": 6,
+          "col_letter": "F",
+          "coordinate": "F7",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J04"
+        },
+        {
+          "row": 7,
+          "col": 7,
+          "col_letter": "G",
+          "coordinate": "G7",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J05"
+        },
+        {
+          "row": 7,
+          "col": 8,
+          "col_letter": "H",
+          "coordinate": "H7",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J06"
+        },
+        {
+          "row": 7,
+          "col": 9,
+          "col_letter": "I",
+          "coordinate": "I7",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J07"
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "col_letter": "C",
+          "coordinate": "C8",
+          "value": null,
+          "adjacent_label": "L01",
+          "column_header": "J01"
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "col_letter": "D",
+          "coordinate": "D8",
+          "value": null,
+          "adjacent_label": "L01",
+          "column_header": "J02"
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "col_letter": "E",
+          "coordinate": "E8",
+          "value": null,
+          "adjacent_label": "L01",
+          "column_header": "J03"
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "col_letter": "F",
+          "coordinate": "F8",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J04"
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "col_letter": "G",
+          "coordinate": "G8",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J05"
+        },
+        {
+          "row": 8,
+          "col": 8,
+          "col_letter": "H",
+          "coordinate": "H8",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J06"
+        },
+        {
+          "row": 8,
+          "col": 9,
+          "col_letter": "I",
+          "coordinate": "I8",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J07"
+        },
+        {
+          "row": 9,
+          "col": 3,
+          "col_letter": "C",
+          "coordinate": "C9",
+          "value": null,
+          "adjacent_label": "L02",
+          "column_header": "J01"
+        },
+        {
+          "row": 9,
+          "col": 4,
+          "col_letter": "D",
+          "coordinate": "D9",
+          "value": null,
+          "adjacent_label": "L02",
+          "column_header": "J02"
+        },
+        {
+          "row": 9,
+          "col": 5,
+          "col_letter": "E",
+          "coordinate": "E9",
+          "value": null,
+          "adjacent_label": "L02",
+          "column_header": "J03"
+        },
+        {
+          "row": 9,
+          "col": 6,
+          "col_letter": "F",
+          "coordinate": "F9",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J04"
+        },
+        {
+          "row": 9,
+          "col": 7,
+          "col_letter": "G",
+          "coordinate": "G9",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J05"
+        },
+        {
+          "row": 9,
+          "col": 8,
+          "col_letter": "H",
+          "coordinate": "H9",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J06"
+        },
+        {
+          "row": 9,
+          "col": 9,
+          "col_letter": "I",
+          "coordinate": "I9",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J07"
+        },
+        {
+          "row": 10,
+          "col": 3,
+          "col_letter": "C",
+          "coordinate": "C10",
+          "value": null,
+          "adjacent_label": "L02",
+          "column_header": "J01"
+        },
+        {
+          "row": 10,
+          "col": 4,
+          "col_letter": "D",
+          "coordinate": "D10",
+          "value": null,
+          "adjacent_label": "L02",
+          "column_header": "J02"
+        },
+        {
+          "row": 10,
+          "col": 5,
+          "col_letter": "E",
+          "coordinate": "E10",
+          "value": null,
+          "adjacent_label": "L02",
+          "column_header": "J03"
+        },
+        {
+          "row": 10,
+          "col": 6,
+          "col_letter": "F",
+          "coordinate": "F10",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J04"
+        },
+        {
+          "row": 10,
+          "col": 7,
+          "col_letter": "G",
+          "coordinate": "G10",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J05"
+        },
+        {
+          "row": 10,
+          "col": 8,
+          "col_letter": "H",
+          "coordinate": "H10",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J06"
+        },
+        {
+          "row": 10,
+          "col": 9,
+          "col_letter": "I",
+          "coordinate": "I10",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J07"
+        },
+        {
+          "row": 11,
+          "col": 3,
+          "col_letter": "C",
+          "coordinate": "C11",
+          "value": null,
+          "adjacent_label": "L02",
+          "column_header": "J01"
+        },
+        {
+          "row": 11,
+          "col": 4,
+          "col_letter": "D",
+          "coordinate": "D11",
+          "value": null,
+          "adjacent_label": "L02",
+          "column_header": "J02"
+        },
+        {
+          "row": 11,
+          "col": 5,
+          "col_letter": "E",
+          "coordinate": "E11",
+          "value": null,
+          "adjacent_label": "L02",
+          "column_header": "J03"
+        },
+        {
+          "row": 11,
+          "col": 6,
+          "col_letter": "F",
+          "coordinate": "F11",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J04"
+        },
+        {
+          "row": 11,
+          "col": 7,
+          "col_letter": "G",
+          "coordinate": "G11",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J05"
+        },
+        {
+          "row": 11,
+          "col": 8,
+          "col_letter": "H",
+          "coordinate": "H11",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J06"
+        },
+        {
+          "row": 11,
+          "col": 9,
+          "col_letter": "I",
+          "coordinate": "I11",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J07"
+        },
+        {
+          "row": 12,
+          "col": 3,
+          "col_letter": "C",
+          "coordinate": "C12",
+          "value": null,
+          "adjacent_label": "L02",
+          "column_header": "J01"
+        },
+        {
+          "row": 12,
+          "col": 4,
+          "col_letter": "D",
+          "coordinate": "D12",
+          "value": null,
+          "adjacent_label": "L02",
+          "column_header": "J02"
+        },
+        {
+          "row": 12,
+          "col": 5,
+          "col_letter": "E",
+          "coordinate": "E12",
+          "value": null,
+          "adjacent_label": "L02",
+          "column_header": "J03"
+        },
+        {
+          "row": 12,
+          "col": 6,
+          "col_letter": "F",
+          "coordinate": "F12",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J04"
+        },
+        {
+          "row": 12,
+          "col": 7,
+          "col_letter": "G",
+          "coordinate": "G12",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J05"
+        },
+        {
+          "row": 12,
+          "col": 8,
+          "col_letter": "H",
+          "coordinate": "H12",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J06"
+        },
+        {
+          "row": 12,
+          "col": 9,
+          "col_letter": "I",
+          "coordinate": "I12",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J07"
+        },
+        {
+          "row": 13,
+          "col": 3,
+          "col_letter": "C",
+          "coordinate": "C13",
+          "value": null,
+          "adjacent_label": "L02",
+          "column_header": "J01"
+        },
+        {
+          "row": 13,
+          "col": 4,
+          "col_letter": "D",
+          "coordinate": "D13",
+          "value": null,
+          "adjacent_label": "L02",
+          "column_header": "J02"
+        },
+        {
+          "row": 13,
+          "col": 5,
+          "col_letter": "E",
+          "coordinate": "E13",
+          "value": null,
+          "adjacent_label": "L02",
+          "column_header": "J03"
+        },
+        {
+          "row": 13,
+          "col": 6,
+          "col_letter": "F",
+          "coordinate": "F13",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J04"
+        },
+        {
+          "row": 13,
+          "col": 7,
+          "col_letter": "G",
+          "coordinate": "G13",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J05"
+        },
+        {
+          "row": 13,
+          "col": 8,
+          "col_letter": "H",
+          "coordinate": "H13",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J06"
+        },
+        {
+          "row": 13,
+          "col": 9,
+          "col_letter": "I",
+          "coordinate": "I13",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J07"
+        },
+        {
+          "row": 14,
+          "col": 3,
+          "col_letter": "C",
+          "coordinate": "C14",
+          "value": null,
+          "adjacent_label": "L03",
+          "column_header": "J01"
+        },
+        {
+          "row": 14,
+          "col": 4,
+          "col_letter": "D",
+          "coordinate": "D14",
+          "value": null,
+          "adjacent_label": "L03",
+          "column_header": "J02"
+        },
+        {
+          "row": 14,
+          "col": 5,
+          "col_letter": "E",
+          "coordinate": "E14",
+          "value": null,
+          "adjacent_label": "L03",
+          "column_header": "J03"
+        },
+        {
+          "row": 14,
+          "col": 6,
+          "col_letter": "F",
+          "coordinate": "F14",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J04"
+        },
+        {
+          "row": 14,
+          "col": 7,
+          "col_letter": "G",
+          "coordinate": "G14",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J05"
+        },
+        {
+          "row": 14,
+          "col": 8,
+          "col_letter": "H",
+          "coordinate": "H14",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J06"
+        },
+        {
+          "row": 14,
+          "col": 9,
+          "col_letter": "I",
+          "coordinate": "I14",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J07"
+        },
+        {
+          "row": 15,
+          "col": 3,
+          "col_letter": "C",
+          "coordinate": "C15",
+          "value": null,
+          "adjacent_label": "L03",
+          "column_header": "J01"
+        },
+        {
+          "row": 15,
+          "col": 4,
+          "col_letter": "D",
+          "coordinate": "D15",
+          "value": null,
+          "adjacent_label": "L03",
+          "column_header": "J02"
+        },
+        {
+          "row": 15,
+          "col": 5,
+          "col_letter": "E",
+          "coordinate": "E15",
+          "value": null,
+          "adjacent_label": "L03",
+          "column_header": "J03"
+        },
+        {
+          "row": 15,
+          "col": 6,
+          "col_letter": "F",
+          "coordinate": "F15",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J04"
+        },
+        {
+          "row": 15,
+          "col": 7,
+          "col_letter": "G",
+          "coordinate": "G15",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J05"
+        },
+        {
+          "row": 15,
+          "col": 8,
+          "col_letter": "H",
+          "coordinate": "H15",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J06"
+        },
+        {
+          "row": 15,
+          "col": 9,
+          "col_letter": "I",
+          "coordinate": "I15",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J07"
+        },
+        {
+          "row": 16,
+          "col": 3,
+          "col_letter": "C",
+          "coordinate": "C16",
+          "value": null,
+          "adjacent_label": "L03",
+          "column_header": "J01"
+        },
+        {
+          "row": 16,
+          "col": 4,
+          "col_letter": "D",
+          "coordinate": "D16",
+          "value": null,
+          "adjacent_label": "L03",
+          "column_header": "J02"
+        },
+        {
+          "row": 16,
+          "col": 5,
+          "col_letter": "E",
+          "coordinate": "E16",
+          "value": null,
+          "adjacent_label": "L03",
+          "column_header": "J03"
+        },
+        {
+          "row": 16,
+          "col": 6,
+          "col_letter": "F",
+          "coordinate": "F16",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J04"
+        },
+        {
+          "row": 16,
+          "col": 7,
+          "col_letter": "G",
+          "coordinate": "G16",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J05"
+        },
+        {
+          "row": 16,
+          "col": 8,
+          "col_letter": "H",
+          "coordinate": "H16",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J06"
+        },
+        {
+          "row": 16,
+          "col": 9,
+          "col_letter": "I",
+          "coordinate": "I16",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J07"
+        },
+        {
+          "row": 17,
+          "col": 3,
+          "col_letter": "C",
+          "coordinate": "C17",
+          "value": null,
+          "adjacent_label": "L03",
+          "column_header": "J01"
+        },
+        {
+          "row": 17,
+          "col": 4,
+          "col_letter": "D",
+          "coordinate": "D17",
+          "value": null,
+          "adjacent_label": "L03",
+          "column_header": "J02"
+        },
+        {
+          "row": 17,
+          "col": 5,
+          "col_letter": "E",
+          "coordinate": "E17",
+          "value": null,
+          "adjacent_label": "L03",
+          "column_header": "J03"
+        },
+        {
+          "row": 17,
+          "col": 6,
+          "col_letter": "F",
+          "coordinate": "F17",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J04"
+        },
+        {
+          "row": 17,
+          "col": 7,
+          "col_letter": "G",
+          "coordinate": "G17",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J05"
+        },
+        {
+          "row": 17,
+          "col": 8,
+          "col_letter": "H",
+          "coordinate": "H17",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J06"
+        },
+        {
+          "row": 17,
+          "col": 9,
+          "col_letter": "I",
+          "coordinate": "I17",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J07"
+        },
+        {
+          "row": 18,
+          "col": 3,
+          "col_letter": "C",
+          "coordinate": "C18",
+          "value": null,
+          "adjacent_label": "L03",
+          "column_header": "J01"
+        },
+        {
+          "row": 18,
+          "col": 4,
+          "col_letter": "D",
+          "coordinate": "D18",
+          "value": null,
+          "adjacent_label": "L03",
+          "column_header": "J02"
+        },
+        {
+          "row": 18,
+          "col": 5,
+          "col_letter": "E",
+          "coordinate": "E18",
+          "value": null,
+          "adjacent_label": "L03",
+          "column_header": "J03"
+        },
+        {
+          "row": 18,
+          "col": 6,
+          "col_letter": "F",
+          "coordinate": "F18",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J04"
+        },
+        {
+          "row": 18,
+          "col": 7,
+          "col_letter": "G",
+          "coordinate": "G18",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J05"
+        },
+        {
+          "row": 18,
+          "col": 8,
+          "col_letter": "H",
+          "coordinate": "H18",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J06"
+        },
+        {
+          "row": 18,
+          "col": 9,
+          "col_letter": "I",
+          "coordinate": "I18",
+          "value": null,
+          "adjacent_label": "",
+          "column_header": "J07"
+        }
+      ]
+    },
+    "Sheet2": {
+      "grey_cell_count": 0,
+      "grey_cells": []
+    },
+    "Sheet3": {
+      "grey_cell_count": 0,
+      "grey_cells": []
+    }
+  }
+}

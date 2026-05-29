@@ -1,0 +1,18 @@
+{
+  "material": "L02",
+  "material_volume": 3750000,
+  "baseline_used_volume": 3600000,
+  "baseline_utilization": 0.96,
+  "checked_vectors_total": 0,
+  "checked_vectors_above_baseline": 0,
+  "vectors_actually_checked": 0,
+  "infeasible_vectors_above_baseline": 0,
+  "feasible_vectors_above_baseline": 0,
+  "unknown_vectors_above_baseline": "not_checked",
+  "best_feasible_used_volume": 3600000,
+  "best_feasible_utilization": 0.96,
+  "proof_status": "NOT_PROVED",
+  "runtime_seconds": 0,
+  "solver_time_limit": 60,
+  "notes": "Exact certificate not run in this pipeline invocation. Full vector enumeration + CP-SAT checking is computationally expensive. L02 max per-block volume NOT rigorously proven. All heuristic searches (grid, improved greedy, extreme point) failed to exceed 3,600,000. Strong empirical evidence but not mathematical proof."
+}

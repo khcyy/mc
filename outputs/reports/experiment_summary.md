@@ -1,17 +1,19 @@
 # Experiment Summary - 3D Cutting Stock Optimization
 
-Generated: 2026-05-29 22:49:58
-Total runtime: 1278.95s
+Generated: 2026-05-29 23:28:50
+Total runtime: 1382.38s
 Random seed: 20260528
 
 ## Runtime Breakdown
 
-- **pattern_generation_time**: 94.71s
-- **master_solve_time**: 94.78s
-- **plotting_time_problem1**: 9.72s
-- **plotting_time_problem2**: 14.10s
-- **excel_writing_time**: 0.14s
-- **total_runtime**: 1278.95s
+- **problem1_pattern_generation_duration**: 90.20s
+- **problem1_master_solve_duration**: 90.24s
+- **problem1_plotting_duration**: 8.23s
+- **problem2_pattern_generation_duration**: 87.19s
+- **problem2_master_solve_duration**: 87.24s
+- **problem2_plotting_duration**: 11.87s
+- **excel_writing_time**: 0.11s
+- **total_runtime**: 1382.38s
 
 ## Output Files
 

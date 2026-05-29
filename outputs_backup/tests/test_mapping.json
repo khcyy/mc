@@ -1,0 +1,20 @@
+{
+  "template": "outputs\\tests\\test_template.xlsx",
+  "sheets": {
+    "Sheet1": {
+      "grey_cell_count": 1,
+      "grey_cells": [
+        {
+          "row": 1,
+          "col": 1,
+          "col_letter": "A",
+          "coordinate": "A1",
+          "value": "Test",
+          "adjacent_label": "",
+          "column_header": "Test"
+        }
+      ],
+      "sections": {}
+    }
+  }
+}

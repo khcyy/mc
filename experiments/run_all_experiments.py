@@ -64,7 +64,9 @@ def main():
             result1 = runner.run_problem1()
 
             runner.save_results(result1, "outputs/results")
-            timing_summary.update(runner.timing)
+            p1_timing = runner.timing
+            timing_summary["problem1_pattern_generation_duration"] = p1_timing.get("pattern_generation_time", 0)
+            timing_summary["problem1_master_solve_duration"] = p1_timing.get("master_solve_time", 0)
             all_outputs["problem1_json"] = "outputs/results/problem1_solution.json"
             all_outputs["problem1_csv"] = "outputs/results/problem1_summary.csv"
 
@@ -73,7 +75,7 @@ def main():
                 result1, runner.materials, runner.pieces,
                 "outputs/figures/problem1", result1.patterns, logger=logger,
             )
-            timing_summary["plotting_time_problem1"] = time.time() - plot_start
+            timing_summary["problem1_plotting_duration"] = time.time() - plot_start
             all_outputs["problem1_plots"] = str(plot_paths)
             logger.info("Problem 1 completed.")
         except Exception as e:
@@ -89,7 +91,9 @@ def main():
             result2 = runner.run_problem2()
 
             runner.save_results(result2, "outputs/results")
-            timing_summary.update(runner.timing)
+            p2_timing = runner.timing
+            timing_summary["problem2_pattern_generation_duration"] = p2_timing.get("pattern_generation_time", 0)
+            timing_summary["problem2_master_solve_duration"] = p2_timing.get("master_solve_time", 0)
             all_outputs["problem2_json"] = "outputs/results/problem2_solution.json"
             all_outputs["problem2_csv"] = "outputs/results/problem2_summary.csv"
 
@@ -98,7 +102,7 @@ def main():
                 result2, runner.materials, runner.pieces,
                 "outputs/figures/problem2", result2.patterns, logger=logger,
             )
-            timing_summary["plotting_time_problem2"] = time.time() - plot_start
+            timing_summary["problem2_plotting_duration"] = time.time() - plot_start
             all_outputs["problem2_plots"] = str(plot_paths)
             logger.info("Problem 2 completed.")
         except Exception as e:
@@ -210,7 +214,7 @@ def _fill_and_validate_excel(logger, all_outputs, timing):
         logger.info(f"{filled_name}: success={success}, data_cells={report['grey_cells_found']}, filled={report['grey_cells_filled']}")
 
         # 4. Validate individually
-        key = "result1" if "result1" in prob_name else "result2"
+        key = "result1" if "problem1" in prob_name else "result2"
         val_report = generate_validation_report(
             filled_path, result, materials, pieces,
             f"outputs/results/excel_validation_{key}.json", logger,
@@ -305,8 +309,10 @@ def _print_final_summary(logger, all_outputs, timing):
   3D Cutting Stock Optimization - COMPLETED
 ======================================================================
   Total Runtime: {timing.get('total_runtime', 0):.2f}s
-  Pattern Gen:   {timing.get('pattern_generation_time', 0):.2f}s
-  Master Solve:  {timing.get('master_solve_time', 0):.2f}s
+  P1 Pattern Gen:  {timing.get('problem1_pattern_generation_duration', 0):.2f}s
+  P1 Master Solve: {timing.get('problem1_master_solve_duration', 0):.2f}s
+  P2 Pattern Gen:  {timing.get('problem2_pattern_generation_duration', 0):.2f}s
+  P2 Master Solve: {timing.get('problem2_master_solve_duration', 0):.2f}s
 
 Output directories:
   Results:  outputs/results/

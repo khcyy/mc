@@ -1,0 +1,21 @@
+{
+  "current_profit": 745680,
+  "profit_density_relaxation_upper_bound": 852187.5,
+  "pattern_library_objective": 745680,
+  "best_bound": 852187.5,
+  "gap": 106507.5,
+  "gap_ratio": 0.12498129812981298,
+  "pattern_library_complete": false,
+  "global_optimal_proved": false,
+  "min_piece_constraints_satisfied": true,
+  "piece_counts": {
+    "J01": 30,
+    "J02": 30,
+    "J03": 100,
+    "J04": 12,
+    "J05": 16,
+    "J06": 362,
+    "J07": 354
+  },
+  "proof_explanation": "NOT PROVED. Problem 2 global optimality requires complete pattern enumeration or branch-and-price. Profit density relaxation bound (852,187.5) is LOOSE. Current solution is pattern-library optimal with high quality (all min-piece constraints met)."
+}

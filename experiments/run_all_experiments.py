@@ -180,6 +180,8 @@ def _fill_and_validate_excel(logger, all_outputs, timing):
     materials = create_materials(load_config("configs/default.yaml"))
     pieces = create_pieces(load_config("configs/default.yaml"))
 
+    combined_validation: dict[str, Any] = {}
+
     for prob_name, template, filled_name in [
         ("problem1", "outputs/results/result1.xlsx", "result1_filled.xlsx"),
         ("problem2", "outputs/results/result2.xlsx", "result2_filled.xlsx"),
@@ -191,11 +193,10 @@ def _fill_and_validate_excel(logger, all_outputs, timing):
 
         result = ExperimentResult.from_json(str(result_path))
 
-        # 1. Backup original
-        backup_path = make_backup(template, "outputs/results/backups")
-        logger.info(f"Backed up {template} to {backup_path}")
+        # 1. Backup
+        make_backup(template, "outputs/results/backups")
 
-        # 2. Save individual template mapping
+        # 2. Template mapping
         map_name = f"template_mapping_{filled_name.replace('.xlsx', '.json')}"
         save_template_mapping(template, f"outputs/results/{map_name}", logger)
 
@@ -203,18 +204,24 @@ def _fill_and_validate_excel(logger, all_outputs, timing):
         excel_start = time.time()
         filled_path = f"outputs/results/{filled_name}"
         success, report = fill_result_xlsx(
-            template, filled_path, result, materials, pieces, logger,
-            timing=timing,
+            template, filled_path, result, materials, pieces, logger, timing=timing,
         )
         timing["excel_writing_time"] = time.time() - excel_start
-        logger.info(f"{filled_name}: success={success}, grey={report['grey_cells_found']}, filled={report['grey_cells_filled']}")
+        logger.info(f"{filled_name}: success={success}, data_cells={report['grey_cells_found']}, filled={report['grey_cells_filled']}")
 
-        # 4. Validate
+        # 4. Validate individually
+        key = "result1" if "result1" in prob_name else "result2"
         val_report = generate_validation_report(
             filled_path, result, materials, pieces,
-            f"outputs/results/excel_validation_report.json", logger,
+            f"outputs/results/excel_validation_{key}.json", logger,
         )
+        combined_validation[key] = val_report
         all_outputs[f"{prob_name}_filled"] = filled_path
+
+    # Combined validation report
+    with open("outputs/results/excel_validation_report.json", "w", encoding="utf-8") as f:
+        json.dump(combined_validation, f, indent=2, ensure_ascii=False)
+    logger.info("Combined excel_validation_report.json saved")
 
     # Combined template mapping
     _save_combined_mapping(logger)

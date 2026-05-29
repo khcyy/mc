@@ -1,0 +1,17 @@
+{
+  "file": "outputs\\results\\result2_filled.xlsx",
+  "exists": true,
+  "timestamp": "2026-05-29T22:49:58.435809",
+  "sheet_names": [
+    "Sheet1",
+    "Sheet2",
+    "Sheet3",
+    "computed_solution"
+  ],
+  "has_computed_solution": true,
+  "grey_cells_found": 105,
+  "grey_cells_filled": 105,
+  "metrics_match_json": true,
+  "warnings": [],
+  "errors": []
+}

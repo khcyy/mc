@@ -1,10 +1,10 @@
 {
-  "current_profit": 742400,
+  "current_profit": 745680,
   "profit_density_relaxation_upper_bound": 852187.5,
-  "relaxation_gap": 109787.5,
-  "relaxation_gap_ratio": 0.12883021635496883,
+  "relaxation_gap": 106507.5,
+  "relaxation_gap_ratio": 0.12498129812981298,
   "bound_note": "profit_density_relaxation_upper_bound ignores geometry, min-piece constraints, and discretization. It is a LOOSE reference bound, NOT a tight optimality certificate. A tight bound requires complete pattern enumeration or branch-and-price.",
   "problem_type": "maximize_profit",
   "solution_status": "OPTIMAL",
-  "solution_objective_value": 742400.0
+  "solution_objective_value": 745680.0
 }

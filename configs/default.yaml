@@ -52,7 +52,7 @@ pattern_generation:
 
 # Greedy pattern configuration
 greedy:
-  mode: improved  # legacy or improved
+  mode: legacy  # legacy or improved (legacy used in competition results)
   max_steps: 1000
   score_profit_density: 0.5
   score_volume_fill: 1.0

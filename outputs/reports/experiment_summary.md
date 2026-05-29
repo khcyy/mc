@@ -1,21 +1,33 @@
 # Experiment Summary - 3D Cutting Stock Optimization
 
-Generated: 2026-05-28 23:12:35
-Total runtime: 828.30s
+Generated: 2026-05-29 11:38:05
+Total runtime: 219.16s
+Random seed: 20260528
+
+## Runtime Breakdown
+
+- **pattern_generation_time**: 1.87s
+- **master_solve_time**: 1.99s
+- **plotting_time_problem1**: 13.38s
+- **plotting_time_problem2**: 22.28s
+- **excel_writing_time**: 0.20s
+- **total_runtime**: 219.16s
 
 ## Output Files
 
 - **problem1_csv**: `outputs/results/problem1_summary.csv`
+- **problem1_filled**: `outputs/results/result1_filled.xlsx`
 - **problem1_json**: `outputs/results/problem1_solution.json`
-- **problem1_plots**: `{'material_utilization': [WindowsPath('outputs/figures/problem1/problem1_material_utilization.png'), WindowsPath('outputs/figures/problem1/problem1_material_utilization.pdf')], 'waste_volume': [WindowsPath('outputs/figures/problem1/problem1_waste_volume.png'), WindowsPath('outputs/figures/problem1/problem1_waste_volume.pdf')], 'piece_counts': [WindowsPath('outputs/figures/problem1/problem1_piece_counts.png'), WindowsPath('outputs/figures/problem1/problem1_piece_counts.pdf')], 'profit_contribution': [WindowsPath('outputs/figures/problem1/problem1_profit_contribution.png'), WindowsPath('outputs/figures/problem1/problem1_profit_contribution.pdf')], 'total_profit': [WindowsPath('outputs/figures/problem1/problem1_total_profit.png'), WindowsPath('outputs/figures/problem1/problem1_total_profit.pdf')], 'pattern_usage': [WindowsPath('outputs/figures/problem1/problem1_pattern_usage.png'), WindowsPath('outputs/figures/problem1/problem1_pattern_usage.pdf')], 'bound_gap': [WindowsPath('outputs/figures/problem1/problem1_bound_gap.png'), WindowsPath('outputs/figures/problem1/problem1_bound_gap.pdf')], '3d_layout_p13': [WindowsPath('outputs/3d_layouts/problem1/3d_layout_pattern_13_L01.png'), WindowsPath('outputs/3d_layouts/problem1/3d_layout_pattern_13_L01.pdf')], '3d_layout_p97': [WindowsPath('outputs/3d_layouts/problem1/3d_layout_pattern_97_L02.png'), WindowsPath('outputs/3d_layouts/problem1/3d_layout_pattern_97_L02.pdf')], '3d_layout_p167': [WindowsPath('outputs/3d_layouts/problem1/3d_layout_pattern_167_L03.png'), WindowsPath('outputs/3d_layouts/problem1/3d_layout_pattern_167_L03.pdf')]}`
 - **problem2_csv**: `outputs/results/problem2_summary.csv`
+- **problem2_filled**: `outputs/results/result2_filled.xlsx`
 - **problem2_json**: `outputs/results/problem2_solution.json`
-- **problem2_plots**: `{'material_utilization': [WindowsPath('outputs/figures/problem2/problem2_material_utilization.png'), WindowsPath('outputs/figures/problem2/problem2_material_utilization.pdf')], 'waste_volume': [WindowsPath('outputs/figures/problem2/problem2_waste_volume.png'), WindowsPath('outputs/figures/problem2/problem2_waste_volume.pdf')], 'piece_counts': [WindowsPath('outputs/figures/problem2/problem2_piece_counts.png'), WindowsPath('outputs/figures/problem2/problem2_piece_counts.pdf')], 'profit_contribution': [WindowsPath('outputs/figures/problem2/problem2_profit_contribution.png'), WindowsPath('outputs/figures/problem2/problem2_profit_contribution.pdf')], 'total_profit': [WindowsPath('outputs/figures/problem2/problem2_total_profit.png'), WindowsPath('outputs/figures/problem2/problem2_total_profit.pdf')], 'pattern_usage': [WindowsPath('outputs/figures/problem2/problem2_pattern_usage.png'), WindowsPath('outputs/figures/problem2/problem2_pattern_usage.pdf')], 'bound_gap': [WindowsPath('outputs/figures/problem2/problem2_bound_gap.png'), WindowsPath('outputs/figures/problem2/problem2_bound_gap.pdf')], '3d_layout_p13': [WindowsPath('outputs/3d_layouts/problem2/3d_layout_pattern_13_L01.png'), WindowsPath('outputs/3d_layouts/problem2/3d_layout_pattern_13_L01.pdf')], '3d_layout_p44': [WindowsPath('outputs/3d_layouts/problem2/3d_layout_pattern_44_L01.png'), WindowsPath('outputs/3d_layouts/problem2/3d_layout_pattern_44_L01.pdf')], '3d_layout_p129': [WindowsPath('outputs/3d_layouts/problem2/3d_layout_pattern_129_L02.png'), WindowsPath('outputs/3d_layouts/problem2/3d_layout_pattern_129_L02.pdf')], '3d_layout_p167': [WindowsPath('outputs/3d_layouts/problem2/3d_layout_pattern_167_L03.png'), WindowsPath('outputs/3d_layouts/problem2/3d_layout_pattern_167_L03.pdf')], '3d_layout_p189': [WindowsPath('outputs/3d_layouts/problem2/3d_layout_pattern_189_L03.png'), WindowsPath('outputs/3d_layouts/problem2/3d_layout_pattern_189_L03.pdf')], '3d_layout_p229': [WindowsPath('outputs/3d_layouts/problem2/3d_layout_pattern_229_L03.png'), WindowsPath('outputs/3d_layouts/problem2/3d_layout_pattern_229_L03.pdf')], '3d_layout_p159': [WindowsPath('outputs/3d_layouts/problem2/3d_layout_pattern_159_L03.png'), WindowsPath('outputs/3d_layouts/problem2/3d_layout_pattern_159_L03.pdf')]}`
-- **result1_filled**: `outputs/results/result1_filled.xlsx`
 
-## Results
+## Optimality Notes
 
-See individual JSON and CSV files for detailed results.
+**IMPORTANT**: CP-SAT solver returning OPTIMAL means the solution is optimal
+WITHIN the generated pattern library, NOT necessarily globally optimal.
+
+For rigorous global optimality claims, see `outputs/reports/optimality_certificate_report.md`.
 
 ## Figures
 
@@ -33,5 +45,6 @@ See individual JSON and CSV files for detailed results.
 |------|-------------|
 | `result1.xlsx` | Original template (preserved) |
 | `result2.xlsx` | Original template (preserved) |
-| `result1_filled.xlsx` | Filled version with solution data + computed_solution sheet |
-| `result2_filled.xlsx` | Filled version with solution data + computed_solution sheet |
+| `result1_filled.xlsx` | Filled + computed_solution |
+| `result2_filled.xlsx` | Filled + computed_solution |
+| `excel_validation_report.json` | Cross-validation report |

@@ -192,6 +192,168 @@ def generate_greedy_patterns(
     return patterns
 
 
+def generate_improved_greedy_patterns(
+    material: Material,
+    pieces: dict[str, Piece],
+    all_orientations: dict[str, list[Orientation]],
+    pattern_id_start: int,
+    config: dict[str, Any],
+    max_patterns: int = 100,
+    rng: random.Random | None = None,
+) -> list[Pattern]:
+    """Improved greedy constructive packing using candidate position tracking.
+
+    Maintains a set of candidate (x,y,z) positions, iteratively places the
+    best-scored piece, and updates candidate positions after each placement.
+
+    Score = score_profit_density * profit_density_norm
+          + score_volume_fill * volume_norm
+          + score_contact * contact_norm
+          + score_low_corner * (1 - (x+y+z)/max_extent)
+          - score_fragmentation * fragment_norm
+    """
+    if rng is None:
+        rng = random.Random(42)
+
+    gc = config.get("greedy", {})
+    max_steps = gc.get("max_steps", 1000)
+    w_profit = gc.get("score_profit_density", 0.5)
+    w_volume = gc.get("score_volume_fill", 1.0)
+    w_contact = gc.get("score_contact", 0.3)
+    w_corner = gc.get("score_low_corner", 0.2)
+    w_frag = gc.get("score_fragmentation_penalty", 0.1)
+
+    patterns: list[Pattern] = []
+    pid = pattern_id_start
+
+    # Multiple strategies for diversity
+    piece_list = sorted(pieces.values(), key=lambda p: -p.profit_density)
+    mat_vol = material.volume
+    max_extent = material.length + material.width + material.height + 1
+
+    # Generate patterns with different starting piece type priorities
+    for strategy_offset in range(5):
+        if len(patterns) >= max_patterns:
+            break
+
+        placed: list[PlacedPiece] = []
+        candidates: list[tuple[int, int, int]] = [(0, 0, 0)]
+
+        piece_order = list(piece_list)
+        # Rotate priorities for diversity
+        for _ in range(strategy_offset):
+            piece_order = piece_order[1:] + piece_order[:1]
+        if strategy_offset > 0:
+            rng.shuffle(piece_order)
+
+        for _step in range(max_steps):
+            if not candidates:
+                break
+
+            best_candidate: tuple[float, PlacedPiece] | None = None
+            tries = 0
+            candidate_sample = candidates
+            if len(candidates) > 50:
+                candidate_sample = rng.sample(candidates, 50)
+
+            for ep in candidate_sample:
+                ex, ey, ez = ep
+                for piece in piece_order:
+                    for orient in all_orientations[piece.name]:
+                        dx, dy, dz = orient.dx, orient.dy, orient.dz
+                        if not is_inside(ex, ey, ez, dx, dy, dz, material):
+                            continue
+                        test = PlacedPiece(
+                            piece_name=piece.name,
+                            x=ex, y=ey, z=ez,
+                            orientation=orient,
+                        )
+                        if _check_overlap_with_list(test, placed):
+                            continue
+                        tries += 1
+
+                        # Score
+                        vol_norm = test.volume / mat_vol
+                        p = pieces.get(piece.name)
+                        profit_norm = p.profit_density / 0.02 if p else 0.0
+                        contact = _compute_contact_score(test, placed, material)
+                        contact_norm = contact / (mat_vol ** (2 / 3) + 1)
+                        corner_score = 1.0 - (ex + ey + ez) / max_extent
+                        frag_penalty = len(candidates) * 0.0005
+
+                        score = (
+                            w_profit * profit_norm
+                            + w_volume * vol_norm
+                            + w_contact * contact_norm
+                            + w_corner * corner_score
+                            - w_frag * frag_penalty
+                        )
+
+                        if best_candidate is None or score > best_candidate[0]:
+                            best_candidate = (score, test)
+
+            if best_candidate is None:
+                break
+
+            chosen = best_candidate[1]
+            placed.append(chosen)
+
+            # Update candidate positions
+            new_candidates: set[tuple[int, int, int]] = set()
+            for pp in placed:
+                new_candidates.add((pp.x + pp.dx, pp.y, pp.z))
+                new_candidates.add((pp.x, pp.y + pp.dy, pp.z))
+                new_candidates.add((pp.x, pp.y, pp.z + pp.dz))
+
+            # Filter valid candidates
+            filtered: list[tuple[int, int, int]] = []
+            for pt in new_candidates:
+                x, y, z = pt
+                if x >= material.length or y >= material.width or z >= material.height:
+                    continue
+                inside_piece = False
+                for pp in placed:
+                    if (pp.x <= x < pp.x + pp.dx and pp.y <= y < pp.y + pp.dy
+                            and pp.z <= z < pp.z + pp.dz):
+                        inside_piece = True
+                        break
+                if not inside_piece:
+                    # Remove dominated
+                    dominated = False
+                    for other in new_candidates:
+                        if pt == other:
+                            continue
+                        ox, oy, oz = other
+                        if ox <= x and oy <= y and oz <= z and (ox < x or oy < y or oz < z):
+                            dominated = True
+                            break
+                    if not dominated:
+                        filtered.append(pt)
+
+            candidates = filtered
+
+        if len(placed) >= 2:
+            is_valid, _ = validate_pattern(placed, material)
+            if is_valid:
+                pattern = Pattern(
+                    pattern_id=pid,
+                    material_name=material.name,
+                    placed_pieces=placed,
+                )
+                patterns.append(pattern)
+                pid += 1
+
+    return patterns
+
+
+def _compute_contact_score(
+    placed: PlacedPiece, existing: list[PlacedPiece], material: Material
+) -> float:
+    """Compute how much surface area the new piece shares with existing pieces and boundaries."""
+    from .geometry import calculate_contact_score as ccs
+    return ccs(placed, existing)
+
+
 def generate_extreme_point_patterns(
     material: Material,
     pieces: dict[str, Piece],
@@ -313,12 +475,22 @@ def generate_all_patterns(
                 mat_patterns.extend(patterns)
 
         if use_greedy:
-            patterns = generate_greedy_patterns(
-                material, pieces, all_orientations,
-                pattern_id_start=global_pid,
-                max_patterns=max_per // 3,
-                rng=rng,
-            )
+            greedy_mode = config.get("greedy", {}).get("mode", "legacy")
+            if greedy_mode == "improved":
+                patterns = generate_improved_greedy_patterns(
+                    material, pieces, all_orientations,
+                    pattern_id_start=global_pid,
+                    config=config,
+                    max_patterns=max_per // 3,
+                    rng=rng,
+                )
+            else:
+                patterns = generate_greedy_patterns(
+                    material, pieces, all_orientations,
+                    pattern_id_start=global_pid,
+                    max_patterns=max_per // 3,
+                    rng=rng,
+                )
             for p in patterns:
                 p.pattern_id = global_pid
                 global_pid += 1

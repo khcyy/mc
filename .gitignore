@@ -23,3 +23,13 @@ Thumbs.db
 
 # Claude
 .claude/
+
+# Office temp files
+~$*.xlsx
+~$*.docx
+
+# Logs
+logs/
+
+# Test outputs
+outputs/tests/

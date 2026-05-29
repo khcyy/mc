@@ -160,7 +160,49 @@ def main():
     except Exception as e:
         logger.error(f"Weight sensitivity failed: {e}", exc_info=True)
 
+    # Save combined CSV
+    _save_sensitivity_csv(pattern_results, weight_results, weight_names, logger)
+
     logger.info("Sensitivity analysis completed.")
+
+
+def _save_sensitivity_csv(pattern_results, weight_results, weight_names, logger) -> None:
+    """Save combined sensitivity results to CSV."""
+    import csv
+    csv_path = Path("outputs/results/sensitivity_results.csv")
+    fieldnames = [
+        "parameter_name", "parameter_value", "problem_name",
+        "objective_value", "total_profit", "material_utilization",
+        "total_waste_volume", "runtime", "total_patterns_generated",
+    ]
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        for max_pat, r in pattern_results.items():
+            writer.writerow({
+                "parameter_name": "max_patterns_per_material",
+                "parameter_value": max_pat,
+                "problem_name": "problem1",
+                "objective_value": r.get("waste", 0),
+                "total_profit": r.get("profit", 0),
+                "material_utilization": r.get("utilization", 0),
+                "total_waste_volume": r.get("waste", 0),
+                "runtime": r.get("runtime", 0),
+                "total_patterns_generated": r.get("num_patterns", 0),
+            })
+        for i, r in enumerate(weight_results):
+            writer.writerow({
+                "parameter_name": "scoring_weights",
+                "parameter_value": weight_names[i] if i < len(weight_names) else f"config_{i}",
+                "problem_name": "problem1",
+                "objective_value": r.get("waste", 0),
+                "total_profit": r.get("profit", 0),
+                "material_utilization": r.get("utilization", 0),
+                "total_waste_volume": r.get("waste", 0),
+                "runtime": r.get("runtime", 0),
+                "total_patterns_generated": 0,
+            })
+    logger.info(f"Sensitivity CSV saved: {csv_path}")
 
 
 if __name__ == "__main__":

@@ -4,43 +4,54 @@
     "utilization": 0.9900990099009901,
     "waste": 750000,
     "profit": 733000,
-    "runtime": 0.04129505157470703,
+    "runtime": 0.04567098617553711,
     "num_patterns": 145,
     "status": "OPTIMAL",
-    "gap": 0.0,
-    "solve_time": 0.015692710876464844
+    "gap": 0.00990099009900991,
+    "solve_time": 0.02811408042907715
   },
-  "greedy_without_extreme_points": {
-    "experiment": "greedy_without_extreme_points",
+  "legacy_greedy_without_extreme_points": {
+    "experiment": "legacy_greedy_without_extreme_points",
     "utilization": 0.9900990099009901,
     "waste": 750000,
     "profit": 733000,
-    "runtime": 52.122655391693115,
+    "runtime": 133.0825479030609,
     "num_patterns": 148,
     "status": "OPTIMAL",
-    "gap": 0.0,
-    "solve_time": 0.009937286376953125
+    "gap": 0.00990099009900991,
+    "solve_time": 0.010857105255126953
+  },
+  "improved_greedy_without_extreme_points": {
+    "experiment": "improved_greedy_without_extreme_points",
+    "utilization": 0.9900990099009901,
+    "waste": 750000,
+    "profit": 733000,
+    "runtime": 0.17923903465270996,
+    "num_patterns": 147,
+    "status": "OPTIMAL",
+    "gap": 0.00990099009900991,
+    "solve_time": 0.01675701141357422
   },
   "extreme_points_without_random_restart": {
     "experiment": "extreme_points_without_random_restart",
     "utilization": 0.9900990099009901,
     "waste": 750000,
     "profit": 733000,
-    "runtime": 52.36972403526306,
-    "num_patterns": 151,
+    "runtime": 0.3496665954589844,
+    "num_patterns": 150,
     "status": "OPTIMAL",
-    "gap": 0.0,
-    "solve_time": 0.015805482864379883
+    "gap": 0.00990099009900991,
+    "solve_time": 0.007950067520141602
   },
   "full_hybrid_solver": {
     "experiment": "full_hybrid_solver",
     "utilization": 0.9900990099009901,
     "waste": 750000,
     "profit": 733000,
-    "runtime": 57.76026129722595,
-    "num_patterns": 178,
+    "runtime": 1.8115155696868896,
+    "num_patterns": 177,
     "status": "OPTIMAL",
-    "gap": 0.0,
-    "solve_time": 0.020449161529541016
+    "gap": 0.00990099009900991,
+    "solve_time": 0.020491838455200195
   }
 }

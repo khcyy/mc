@@ -1,0 +1,17 @@
+{
+  "template": "outputs\\results\\result1.xlsx",
+  "sheets": {
+    "Sheet1": {
+      "grey_cell_count": 0,
+      "grey_cells": []
+    },
+    "Sheet2": {
+      "grey_cell_count": 0,
+      "grey_cells": []
+    },
+    "Sheet3": {
+      "grey_cell_count": 0,
+      "grey_cells": []
+    }
+  }
+}

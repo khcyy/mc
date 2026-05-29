@@ -45,10 +45,18 @@ def run_ablation_experiment(
         pg_config["grid_patterns"] = True
         pg_config["greedy_patterns"] = False
         pg_config["extreme_point_patterns"] = False
-    elif experiment_type == "greedy_without_extreme_points":
+    elif experiment_type == "legacy_greedy_without_extreme_points":
         pg_config["grid_patterns"] = True
         pg_config["greedy_patterns"] = True
         pg_config["extreme_point_patterns"] = False
+        cfg["greedy"] = cfg.get("greedy", {})
+        cfg["greedy"]["mode"] = "legacy"
+    elif experiment_type == "improved_greedy_without_extreme_points":
+        pg_config["grid_patterns"] = True
+        pg_config["greedy_patterns"] = True
+        pg_config["extreme_point_patterns"] = False
+        cfg["greedy"] = cfg.get("greedy", {})
+        cfg["greedy"]["mode"] = "improved"
     elif experiment_type == "extreme_points_without_random_restart":
         pg_config["grid_patterns"] = True
         pg_config["greedy_patterns"] = True
@@ -112,7 +120,8 @@ def main():
 
     experiments = [
         "only_grid_patterns",
-        "greedy_without_extreme_points",
+        "legacy_greedy_without_extreme_points",
+        "improved_greedy_without_extreme_points",
         "extreme_points_without_random_restart",
         "full_hybrid_solver",
     ]
@@ -136,11 +145,14 @@ def main():
                 "error": str(e),
             }
 
-    # Save results
+    # Save results JSON
     output_path = Path("outputs/results/ablation_results.json")
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
     logger.info(f"Ablation results saved to: {output_path}")
+
+    # Save results CSV
+    _save_ablation_csv(results, logger)
 
     # Generate plot
     try:
@@ -150,6 +162,39 @@ def main():
         logger.error(f"Failed to generate ablation plot: {e}")
 
     logger.info("Ablation study completed.")
+
+
+def _save_ablation_csv(results: dict, logger) -> None:
+    """Save ablation results to CSV."""
+    import csv
+    csv_path = Path("outputs/results/ablation_results.csv")
+    fieldnames = [
+        "experiment_name", "problem_name", "status",
+        "total_profit", "total_used_volume", "total_waste_volume",
+        "material_utilization", "gap_metric", "total_runtime",
+        "pattern_generation_time", "master_solve_time",
+        "total_patterns_generated", "num_patterns_used",
+    ]
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        for name, r in results.items():
+            writer.writerow({
+                "experiment_name": name,
+                "problem_name": "problem1",
+                "status": r.get("status", ""),
+                "total_profit": r.get("profit", 0),
+                "total_used_volume": 0,
+                "total_waste_volume": r.get("waste", 0),
+                "material_utilization": r.get("utilization", 0),
+                "gap_metric": r.get("gap", 0),
+                "total_runtime": r.get("runtime", 0),
+                "pattern_generation_time": 0,
+                "master_solve_time": r.get("solve_time", 0),
+                "total_patterns_generated": r.get("num_patterns", 0),
+                "num_patterns_used": 0,
+            })
+    logger.info(f"Ablation CSV saved: {csv_path}")
 
 
 if __name__ == "__main__":

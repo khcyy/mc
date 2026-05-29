@@ -274,30 +274,41 @@ def plot_bound_gap(
     output_dir: str | Path,
     logger: logging.Logger | None = None,
 ) -> list[Path]:
-    """Plot gap between solution and upper/lower bounds."""
+    """Plot gap between solution and theoretical bounds."""
     output_dir = ensure_dir(output_dir)
 
-    fig, ax = plt.subplots(figsize=(8, 5))
+    fig, ax = plt.subplots(figsize=(10, 5))
     s = result.solution
 
-    # For problem 1, visualize waste gap
-    # For problem 2, visualize profit gap
     problem_type = result.config.get("objective", "maximize_utilization")
     if problem_type == "maximize_utilization":
-        labels = ["Waste (Lower=Better)", "Theoretical Min Waste"]
-        values = [s.total_waste_volume, 0]
-        colors = ["#F44336", "#4CAF50"]
+        # Show utilization vs 100% theoretical upper bound
+        labels = [f"Current Utilization\n({s.material_utilization*100:.2f}%)",
+                  "Theoretical Upper Bound\n(100%)"]
+        values = [s.material_utilization * 100, 100.0]
+        colors = ["#2196F3", "#4CAF50"]
+        ax.set_ylabel("Utilization (%)")
+        ax.set_title(
+            f"{result.problem_name.upper()}: Utilization vs Theoretical Bound\n"
+            f"Utilization Gap to 100% = {(1.0 - s.material_utilization) * 100:.4f}%",
+            fontweight="bold",
+        )
     else:
-        labels = ["Achieved Profit", "Theoretical Upper Bound"]
+        labels = ["Current Profit", "Profit Density\nRelaxation Bound"]
         values = [s.total_profit, s.upper_bound]
         colors = ["#2196F3", "#FFC107"]
+        ax.set_ylabel("Profit")
+        ax.set_title(
+            f"{result.problem_name.upper()}: Profit vs Relaxation Bound\n"
+            f"Relaxation Gap = {s.gap*100:.2f}% (LOOSE bound, not tight)",
+            fontweight="bold",
+        )
 
     bars = ax.bar(labels, values, color=colors, edgecolor="white", linewidth=1.2, width=0.5)
     for bar, val in zip(bars, values):
         ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + max(values) * 0.02,
                 f"{val:,.1f}", ha="center", va="bottom", fontweight="bold")
 
-    ax.set_title(f"{result.problem_name.upper()}: Bound & Gap Analysis\nGap = {s.gap*100:.2f}%", fontweight="bold")
     plt.tight_layout()
     return save_figure(fig, output_dir / f"{result.problem_name}_bound_gap")
 

@@ -267,18 +267,19 @@ def _extract_solution(
     # Objective value
     objective_value = solver.ObjectiveValue()
 
-    # Compute bounds
-    upper_bound = _compute_upper_bound(
+    # Compute semantically correct bounds
+    problem_type = config.get("objective", "maximize_utilization")
+    ub, lb, gap = _compute_correct_bounds(
+        problem_type=problem_type,
+        objective_value=objective_value,
+        total_material_volume=total_material_volume,
+        total_waste=total_waste,
+        utilization=utilization,
+        total_profit=total_profit,
+        solver=solver,
         materials=materials,
         pieces=pieces,
-        all_patterns=all_patterns,
-        config=config,
-    )
-    lower_bound = objective_value if solver_status != SolverStatus.INFEASIBLE else 0.0
-    gap = (
-        (upper_bound - lower_bound) / upper_bound
-        if upper_bound > 0
-        else 0.0
+        solver_status=solver_status,
     )
 
     return MasterSolution(
@@ -292,30 +293,76 @@ def _extract_solution(
         material_utilization=utilization,
         piece_counts=piece_counts,
         solve_time_seconds=solve_time,
-        upper_bound=upper_bound,
-        lower_bound=lower_bound,
+        upper_bound=ub,
+        lower_bound=lb,
         gap=gap,
     )
 
 
+def _compute_correct_bounds(
+    problem_type: str,
+    objective_value: float,
+    total_material_volume: int,
+    total_waste: int,
+    utilization: float,
+    total_profit: float,
+    solver: cp_model.CpSolver,
+    materials: dict[str, Material],
+    pieces: dict[str, Piece],
+    solver_status: Any,
+) -> tuple[float, float, float]:
+    """Compute semantically correct upper bound, lower bound, and gap.
+
+    Problem 1 (minimize waste):
+        upper_bound on utilization = 1.0 (100%)
+        lower_bound on utilization = current_utilization
+        gap = (1.0 - utilization) / 1.0 = 1.0 - utilization
+
+        OR in waste terms:
+        waste_lower_bound = 0
+        current_waste = total_waste
+        waste_gap_to_zero = total_waste
+
+    Problem 2 (maximize profit):
+        upper_bound = profit_density_relaxation (LOOSE, not tight)
+        lower_bound = current_total_profit
+        gap = (upper_bound - lower_bound) / upper_bound
+    """
+    if problem_type == "maximize_utilization":
+        # Utilization viewpoint (semantically clearer):
+        # upper_bound = 1.0 (100% utilization = theoretical best)
+        # lower_bound = current_utilization (feasible solution)
+        upper_bound = 1.0
+        lower_bound = utilization
+        gap = 1.0 - utilization  # distance from 100%
+
+        # Note: we store upper_bound on utilization, NOT waste
+        # The objective_value from the solver is the minimized waste,
+        # but for gap reporting we use utilization
+        return upper_bound, lower_bound, gap
+
+    else:
+        # Problem 2: maximize profit
+        total_volume = sum(m.volume * m.count for m in materials.values())
+        max_density = max(p.profit_density for p in pieces.values())
+        upper_bound = total_volume * max_density  # loose volume-relaxation bound
+        lower_bound = total_profit  # feasible solution value
+        gap = (upper_bound - lower_bound) / upper_bound if upper_bound > 0 else 0.0
+        return upper_bound, lower_bound, gap
+
+
+# Legacy function kept for backward compatibility
 def _compute_upper_bound(
     materials: dict[str, Material],
     pieces: dict[str, Piece],
     all_patterns: dict[str, list[Pattern]],
     config: dict[str, Any],
 ) -> float:
-    """Compute theoretical upper bound.
-
-    For Problem 1 (utilization): total material volume (100% utilization).
-    For Problem 2 (profit): total material volume * max profit density.
-    """
-    problem_type = config.get("objective", "maximize_utilization")
+    """Compute theoretical upper bound. DEPRECATED - use _compute_correct_bounds."""
     total_volume = sum(m.volume * m.count for m in materials.values())
-
+    problem_type = config.get("objective", "maximize_utilization")
     if problem_type == "maximize_utilization":
-        # Best possible: 100% utilization = 0 waste
-        return 0.0  # waste upper bound is 0 (minimization problem)
+        return 1.0  # utilization upper bound
     else:
-        # Best possible profit: fill all volume with highest profit density piece
         max_density = max(p.profit_density for p in pieces.values())
         return total_volume * max_density

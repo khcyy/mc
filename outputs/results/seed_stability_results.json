@@ -1,0 +1,47 @@
+[
+  {
+    "seed": 20260528,
+    "problem_name": "problem1",
+    "objective_value": 750000,
+    "material_utilization": 0.9900990099009901,
+    "total_profit": 733000,
+    "total_waste_volume": 750000,
+    "runtime": 0.8153777122497559
+  },
+  {
+    "seed": 42,
+    "problem_name": "problem1",
+    "objective_value": 750000,
+    "material_utilization": 0.9900990099009901,
+    "total_profit": 733000,
+    "total_waste_volume": 750000,
+    "runtime": 0.9851665496826172
+  },
+  {
+    "seed": 12345,
+    "problem_name": "problem1",
+    "objective_value": 750000,
+    "material_utilization": 0.9900990099009901,
+    "total_profit": 733000,
+    "total_waste_volume": 750000,
+    "runtime": 1.9431960582733154
+  },
+  {
+    "seed": 99999,
+    "problem_name": "problem1",
+    "objective_value": 750000,
+    "material_utilization": 0.9900990099009901,
+    "total_profit": 733000,
+    "total_waste_volume": 750000,
+    "runtime": 2.0799810886383057
+  },
+  {
+    "seed": 77777,
+    "problem_name": "problem1",
+    "objective_value": 750000,
+    "material_utilization": 0.9900990099009901,
+    "total_profit": 733000,
+    "total_waste_volume": 750000,
+    "runtime": 2.194887399673462
+  }
+]

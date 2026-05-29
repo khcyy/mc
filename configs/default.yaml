@@ -50,6 +50,26 @@ pattern_generation:
   greedy_patterns: true
   extreme_point_patterns: true
 
+# Greedy pattern configuration
+greedy:
+  mode: improved  # legacy or improved
+  max_steps: 1000
+  score_profit_density: 0.5
+  score_volume_fill: 1.0
+  score_contact: 0.3
+  score_low_corner: 0.2
+  score_fragmentation_penalty: 0.1
+
+# Exact certificate configuration
+exact_certificate:
+  grid_gcd: 5
+  min_used_volume_threshold: 0.5
+  only_nondominated_vectors: true
+  max_vectors: 50000
+  exact_mode: bounded  # full / bounded / high_value_only
+  cp_sat_time_limit: 60
+  enable_l02_infeasibility: true
+
 # CP-SAT validation
 cp_sat:
   time_limit_seconds: 30

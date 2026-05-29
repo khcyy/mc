@@ -65,6 +65,9 @@ class ExperimentRunner:
         # Patterns will be generated on demand
         self._all_patterns: dict[str, list[Pattern]] | None = None
 
+        # Timing tracking
+        self.timing: dict[str, float] = {}
+
     @property
     def all_patterns(self) -> dict[str, list[Pattern]]:
         if self._all_patterns is None:
@@ -73,11 +76,11 @@ class ExperimentRunner:
             self._all_patterns = generate_all_patterns(
                 self.materials, self.pieces, self.all_orientations, self.config
             )
-            elapsed = time.time() - start
+            self.timing["pattern_generation_time"] = time.time() - start
             total = sum(len(v) for v in self._all_patterns.values())
             self.logger.info(
                 f"Generated {total} patterns across {len(self._all_patterns)} materials "
-                f"in {elapsed:.2f}s"
+                f"in {self.timing['pattern_generation_time']:.2f}s"
             )
             for mat_name, patterns in self._all_patterns.items():
                 utils = [
@@ -98,14 +101,15 @@ class ExperimentRunner:
         self.logger.info("Running Problem 1: Maximize Material Utilization")
         self.logger.info("=" * 60)
 
+        solve_start = time.time()
         solution = solve_master_problem1(
             materials=self.materials,
             pieces=self.pieces,
             all_patterns=self.all_patterns,
             config=self.config,
         )
+        self.timing["master_solve_time"] = time.time() - solve_start
 
-        # Collect used patterns
         all_pattern_flat: list[Pattern] = []
         for patterns in self.all_patterns.values():
             all_pattern_flat.extend(patterns)
@@ -113,12 +117,15 @@ class ExperimentRunner:
         self._log_solution("Problem 1", solution)
         self._validate_solution(solution, all_pattern_flat)
 
-        return ExperimentResult(
+        result = ExperimentResult(
             problem_name="problem1",
             solution=solution,
             patterns=all_pattern_flat,
             config=self.config,
         )
+        # Store timing in metadata
+        result.solution.metadata["timing"] = dict(self.timing)
+        return result
 
     def run_problem2(self) -> ExperimentResult:
         """Run Problem 2: Maximize total profit with minimum piece constraints."""
@@ -126,12 +133,14 @@ class ExperimentRunner:
         self.logger.info("Running Problem 2: Maximize Total Profit")
         self.logger.info("=" * 60)
 
+        solve_start = time.time()
         solution = solve_master_problem2(
             materials=self.materials,
             pieces=self.pieces,
             all_patterns=self.all_patterns,
             config=self.config,
         )
+        self.timing["master_solve_time"] = time.time() - solve_start
 
         all_pattern_flat: list[Pattern] = []
         for patterns in self.all_patterns.values():
@@ -140,12 +149,14 @@ class ExperimentRunner:
         self._log_solution("Problem 2", solution)
         self._validate_solution(solution, all_pattern_flat)
 
-        return ExperimentResult(
+        result = ExperimentResult(
             problem_name="problem2",
             solution=solution,
             patterns=all_pattern_flat,
             config=self.config,
         )
+        result.solution.metadata["timing"] = dict(self.timing)
+        return result
 
     def _log_solution(self, name: str, solution: MasterSolution) -> None:
         """Log solution details."""

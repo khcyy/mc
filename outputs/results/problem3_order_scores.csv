@@ -1,0 +1,4 @@
+order_name,gross_profit,inventory_coverage_pct,net_volume,production_coverage_pct,estimated_purchase_ratio_pct,estimated_purchase_cost,estimated_net_profit,best_case_net_profit,worst_case_purchase_cost
+H01,285620,16.3,23268000,100.0,10.0,42740,242880,285620,478400
+H02,316320,14.25,27268000,100.0,10.0,48200,268120,316320,539800
+H03,330460,14.06,27710000,100.0,10.0,50740,279720,330460,568080

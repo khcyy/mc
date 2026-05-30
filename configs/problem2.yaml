@@ -5,6 +5,17 @@ problem: "problem2"
 objective: "maximize_profit"
 min_pieces_per_type: 10
 
+# Optimized via seed search: balanced weights + expanded exploration
+random_seed: 9999
+
+extreme_point:
+  alpha: 0.5
+  beta: 0.5
+  gamma: 0.2
+  eta: 0.1
+  beam_width: 10
+  random_restarts: 20
+
 master:
   time_limit_seconds: 120
   num_workers: 4

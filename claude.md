@@ -307,14 +307,48 @@ A: It assumes we can fill all volume with the highest-profit-density piece, igno
 **Q: How to interpret gap values?**
 A: For Problem 1, `utilization_gap_to_full` shows how far from 100%. For Problem 2, `relaxation_gap_ratio` is a loose upper estimate — the true optimality gap is likely smaller.
 
-## 18. Extending to Sub-Problem 3
+## 18. Problem 3: Order Selection (Undergraduate)
 
-1. Add new objective to `master_solver.py` (e.g., `solve_master_problem3()`)
-2. Update `configs/default.yaml` with new constraints/objectives
-3. Generate new specific patterns if needed
-4. Add Excel logic for new template cells
-5. Add specific visualization functions
-6. Update certificate module for new optimality requirements
+### 18.1 Problem Context
+
+Production cycle end: remaining materials (L01×2, L02×2, L03×1) and workpiece stock (J03=20, J05=3, J06=11, J07=19). Three candidate orders (H01, H02, H03) available. Must choose one order to fulfill. Emergency purchase allowed at 2× profit cost for shortfall.
+
+**Undergraduate requirement**: Solution idea + analysis only (no full solve required).
+
+### 18.2 Decision Model
+
+Core logic: inventory deduction → net demand → remaining material production → emergency purchase → net profit comparison.
+
+$$d_{hj}^{\text{net}} = \max(0, d_{hj} - s_j)$$
+
+Order selection: $\sum_h y_h = 1$ (three-choose-one).
+
+Objective: $\max$ OrderRevenue $-$ EmergencyPurchaseCost
+
+Emergency purchase cost: $C_{\text{buy}} = \sum_j 2 r_j q_j^{\text{buy}}$
+
+### 18.3 Order Analysis Summary
+
+| Order | Gross Profit | Net Demand Vol | Production Coverage | Recommendation |
+|-------|-------------|----------------|---------------------|----------------|
+| H01 | 285,620 | 23,268,000 | 119.9% | Conservative |
+| H02 | 316,320 | 27,268,000 | 102.3% | Backup |
+| **H03** | **330,460** | 27,710,000 | 100.7% | **Recommended** |
+
+### 18.4 Key Files
+- Report: `outputs/reports/problem3_order_selection_idea.md` (paper-ready)
+- Script: `experiments/run_problem3_idea.py`
+- Output: `outputs/results/problem3_order_scores.csv`, `outputs/results/problem3_order_recommendation.json`
+
+## 19. Problem 2 Optimization (v2)
+
+Problem 2 improved from 745,680 to **748,640** (+2,960 / +0.40%) via:
+- Balanced weights (alpha=0.5, beta=0.5, gamma=0.2, eta=0.1)
+- Expanded exploration (beam_width=10, random_restarts=20)
+- Seed optimization (seed=9999)
+
+Config: `configs/problem2.yaml`
+Formal result: `outputs/results/problem2_solution.json`
 
 ## Implementation Notes
 

@@ -327,20 +327,31 @@ Objective: $\max$ OrderRevenue $-$ EmergencyPurchaseCost
 
 Emergency purchase cost: $C_{\text{buy}} = \sum_j 2 r_j q_j^{\text{buy}}$
 
-### 18.3 Order Analysis Summary
+### 18.3 Dual Coverage Metrics
 
-| Order | Gross Profit | Net Demand Vol | Production Coverage | Recommendation |
-|-------|-------------|----------------|---------------------|----------------|
-| H01 | 285,620 | 23,268,000 | 119.9% | Conservative |
-| H02 | 316,320 | 27,268,000 | 102.3% | Backup |
-| **H03** | **330,460** | 27,710,000 | 100.7% | **Recommended** |
+Two independent coverage ratios are used to avoid over-optimistic estimates:
 
-### 18.4 Key Files
+1. **Theoretical coverage**: total_remaining_volume / net_demand_volume (ignores geometry loss)
+2. **Effective coverage (95%)**: 0.95 × total_remaining_volume / net_demand_volume (accounts for packing inefficiency)
+
+### 18.4 Order Analysis Summary
+
+| Order | Gross Profit | Net Demand Vol | Theoretical Cov. | Effective Cov. (95%) | Recommendation |
+|-------|-------------|----------------|-----------------|---------------------|----------------|
+| H01 | 285,620 | 23,268,000 | 119.9% | 113.9% | Conservative |
+| H02 | 316,320 | 27,268,000 | 102.3% | 97.2% | Backup |
+| **H03** | **330,460** | 27,710,000 | **100.7%** | **95.7%** | **Recommended** |
+
+**Switch condition**: If H03 emergency purchase ratio exceeds 20%, switch to H02.
+
+Note: "good producibility" refers to candidate pattern library observations, NOT proven global optimal production capacity.
+
+### 18.5 Key Files
 - Report: `outputs/reports/problem3_order_selection_idea.md` (paper-ready)
 - Script: `experiments/run_problem3_idea.py`
 - Output: `outputs/results/problem3_order_scores.csv`, `outputs/results/problem3_order_recommendation.json`
 
-## 19. Problem 2 Optimization (v2)
+## 19. Problem 2 Optimization (v2 — Final)
 
 Problem 2 improved from 745,680 to **748,640** (+2,960 / +0.40%) via:
 - Balanced weights (alpha=0.5, beta=0.5, gamma=0.2, eta=0.1)
@@ -348,7 +359,7 @@ Problem 2 improved from 745,680 to **748,640** (+2,960 / +0.40%) via:
 - Seed optimization (seed=9999)
 
 Config: `configs/problem2.yaml`
-Formal result: `outputs/results/problem2_solution.json`
+Formal result: `outputs/results/problem2_solution.json` (validated: `problem2_solution_validation.json`, all geometry checks passed)
 
 ## Implementation Notes
 

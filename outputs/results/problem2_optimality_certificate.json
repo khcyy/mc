@@ -17,5 +17,9 @@
     "J06": 370,
     "J07": 354
   },
-  "proof_explanation": "NOT PROVED. Improved via balanced weights (alpha=0.5, beta=0.5, gamma=0.2, eta=0.1) with expanded exploration (beam_width=10, random_restarts=20, seed=9999). Solution is pattern-library optimal with all min-piece constraints met. 748640 exceeds previous best of 745680 by 2,960 (0.40% improvement)."
+  "solution_file_validated": true,
+  "validation_file": "outputs/results/problem2_solution_validation.json",
+  "geometry_validation": "PASSED",
+  "volume_accounting": "PASSED (72832000 + 2918000 = 75750000)",
+  "proof_explanation": "NOT PROVED. Improved via balanced weights (alpha=0.5, beta=0.5, gamma=0.2, eta=0.1) with expanded exploration (beam_width=10, random_restarts=20, seed=9999). Solution is pattern-library optimal with all min-piece constraints met. 748640 exceeds previous best of 745680 by 2,960 (0.40% improvement). problem2_solution.json is non-empty (208 patterns, 1.15MB). Full geometry validation passed."
 }

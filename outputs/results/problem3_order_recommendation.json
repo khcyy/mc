@@ -5,6 +5,8 @@
     "L03": 1
   },
   "remaining_total_volume": 27900000,
+  "remaining_effective_volume": 26505000,
+  "effective_utilization_rate": 0.95,
   "piece_stock": {
     "J01": 0,
     "J02": 0,
@@ -38,6 +40,24 @@
       "J07": 44
     }
   },
+  "recommended_order": "H03",
+  "backup_order": "H02",
+  "conservative_order": "H01",
+  "switch_condition": "If H03 emergency purchase ratio exceeds 20%, switch to H02.",
+  "coverage_metrics": {
+    "H01": {
+      "theoretical_coverage_pct": 119.9,
+      "effective_coverage_pct": 113.9
+    },
+    "H02": {
+      "theoretical_coverage_pct": 102.3,
+      "effective_coverage_pct": 97.2
+    },
+    "H03": {
+      "theoretical_coverage_pct": 100.7,
+      "effective_coverage_pct": 95.7
+    }
+  },
   "analysis": [
     {
       "order_name": "H01",
@@ -52,12 +72,16 @@
       "inventory_coverage_pct": 16.3,
       "net_volume": 23268000,
       "remaining_material_capacity": 27900000,
-      "production_coverage_pct": 100.0,
+      "effective_remaining_capacity": 26505000,
+      "theoretical_coverage_pct": 119.9,
+      "effective_coverage_pct": 113.9,
       "estimated_purchase_ratio_pct": 10.0,
       "estimated_purchase_cost": 42740,
       "estimated_net_profit": 242880,
       "best_case_net_profit": 285620,
-      "worst_case_purchase_cost": 478400
+      "worst_case_purchase_cost": 478400,
+      "purchase_below_threshold": true,
+      "recommendation_role": "conservative"
     },
     {
       "order_name": "H02",
@@ -73,12 +97,16 @@
       "inventory_coverage_pct": 14.25,
       "net_volume": 27268000,
       "remaining_material_capacity": 27900000,
-      "production_coverage_pct": 100.0,
-      "estimated_purchase_ratio_pct": 10.0,
-      "estimated_purchase_cost": 48200,
-      "estimated_net_profit": 268120,
+      "effective_remaining_capacity": 26505000,
+      "theoretical_coverage_pct": 102.3,
+      "effective_coverage_pct": 97.2,
+      "estimated_purchase_ratio_pct": 12.8,
+      "estimated_purchase_cost": 66360,
+      "estimated_net_profit": 249960,
       "best_case_net_profit": 316320,
-      "worst_case_purchase_cost": 539800
+      "worst_case_purchase_cost": 539800,
+      "purchase_below_threshold": true,
+      "recommendation_role": "backup"
     },
     {
       "order_name": "H03",
@@ -93,14 +121,17 @@
       "inventory_coverage_pct": 14.06,
       "net_volume": 27710000,
       "remaining_material_capacity": 27900000,
-      "production_coverage_pct": 100.0,
-      "estimated_purchase_ratio_pct": 10.0,
-      "estimated_purchase_cost": 50740,
-      "estimated_net_profit": 279720,
+      "effective_remaining_capacity": 26505000,
+      "theoretical_coverage_pct": 100.7,
+      "effective_coverage_pct": 95.7,
+      "estimated_purchase_ratio_pct": 14.3,
+      "estimated_purchase_cost": 74020,
+      "estimated_net_profit": 256440,
       "best_case_net_profit": 330460,
-      "worst_case_purchase_cost": 568080
+      "worst_case_purchase_cost": 568080,
+      "purchase_below_threshold": true,
+      "recommendation_role": "recommended"
     }
   ],
-  "recommended_order": "H03",
-  "recommendation_reason": "Order H03 achieves the highest estimated net profit (279,720) with inventory coverage of 14.1%. Production capacity (27,900,000 remaining volume) is sufficient to cover most of the net demand (27,710,000), minimizing emergency purchase cost."
+  "reasoning": "Order H03 achieves the highest estimated net profit (256,440) among all candidates. Theoretical volume coverage is 100.7%, conservative effective coverage (at 95% utilization) is 95.7%. Order H02 serves as the backup: it has lower gross profit (249,960) but more flexible geometry (smaller workpieces J01/J02/J07) and J06 is fully covered by stock. If H03 emergency purchase ratio exceeds 20%, switch to H02."
 }

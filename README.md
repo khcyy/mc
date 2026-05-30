@@ -32,11 +32,19 @@ See `论文写作指南-给队友.md` for paper-writing guidance (Chinese).
 
 ## Key Results
 
-| Problem | Objective | Result | Status |
-|---------|-----------|--------|--------|
-| Problem 1 | Maximize utilization | **99.01%** | L01/L03 = 100% |
-| Problem 2 | Maximize profit | **748,640** | All pieces >= 10 |
-| Problem 3 | Order selection | **H03 recommended** | Idea-level (UG) |
+| Problem | Objective | Result | Notes |
+|---------|-----------|--------|-------|
+| Problem 1 | Maximize utilization | **99.01%** | L01/L03 = 100%, L02 = 96% |
+| Problem 2 | Maximize profit | **748,640** | All pieces >= 10, validated |
+| Problem 3 | Order selection | **H03** recommended | H02 backup; switch if purchase > 20% |
+
+### Problem 3 Coverage Metrics
+
+| Order | Gross Profit | Theoretical Cov. | Effective Cov. (95%) | Role |
+|-------|-------------|-----------------|---------------------|------|
+| H03 | 330,460 | 100.7% | 95.7% | Recommended |
+| H02 | 316,320 | 102.3% | 97.2% | Backup |
+| H01 | 285,620 | 119.9% | 113.9% | Conservative |
 
 ## Output
 
@@ -53,7 +61,10 @@ Logs are in `logs/`.
 |------|-------|
 | Problem 1 full solution | `outputs/results/problem1_solution.json` |
 | Problem 2 full solution | `outputs/results/problem2_solution.json` |
+| Problem 2 validation | `outputs/results/problem2_solution_validation.json` |
 | Problem 3 order analysis | `outputs/reports/problem3_order_selection_idea.md` |
+| Problem 3 scores CSV | `outputs/results/problem3_order_scores.csv` |
+| Problem 3 recommendation JSON | `outputs/results/problem3_order_recommendation.json` |
 | Ablation study data | `outputs/results/ablation_results.csv` |
 | Sensitivity analysis data | `outputs/results/sensitivity_results.csv` |
 | Optimality certificates | `outputs/results/*_certificate.json` |

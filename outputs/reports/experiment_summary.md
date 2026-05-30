@@ -1,7 +1,7 @@
 # Experiment Summary - 3D Cutting Stock Optimization
 
 Generated: 2026-05-30
-Total runtime: ~1382s (full pipeline)
+Total runtime: ~1,380s (full pipeline)
 Random seed: 20260528 (P1), 9999 (P2 — optimized)
 
 ## Runtime Breakdown
@@ -13,11 +13,11 @@ Random seed: 20260528 (P1), 9999 (P2 — optimized)
 - **problem2_master_solve_duration**: <1s
 - **problem2_plotting_duration**: ~12s
 - **excel_writing_time**: <1s
-- **total_runtime**: ~1380s
+- **total_runtime**: ~1,380s
 
 ## Final Results Summary
 
-### Problem 1: Maximize Utilization
+### Problem 1: Maximize Material Utilization
 - **Status**: OPTIMAL (pattern-library)
 - **Material Utilization**: 99.01%
 - **Total Waste**: 750,000
@@ -25,43 +25,58 @@ Random seed: 20260528 (P1), 9999 (P2 — optimized)
 - **Piece Counts**: J02=150, J03=700
 - **L01**: 100% utilized | **L02**: 96% utilized | **L03**: 100% utilized
 
-### Problem 2: Maximize Profit (Formal Result — v2 Improved)
+### Problem 2: Maximize Profit (v2 — Final)
 - **Status**: OPTIMAL (pattern-library)
 - **Total Profit**: **748,640** (improved from 745,680, +2,960 / +0.40%)
-- **Material Utilization**: 96.15%
+- **Material Utilization**: 96.15% (72,832,000 / 75,750,000)
 - **Total Waste**: 2,918,000
 - **Piece Counts**: J01=30, J02=30, J03=100, J04=12, J05=14, J06=370, J07=354
 - **All pieces >= 10**: YES
 - **Config**: balanced weights (alpha=0.5, beta=0.5, gamma=0.2, eta=0.1), beam_width=10, random_restarts=20, seed=9999
-- **Previous best**: 745,680 (default weights), 746,440 (sensitivity config_3)
+- **Validation**: `problem2_solution_validation.json` — geometry validation PASSED, volume accounting verified
+- Previous best: 745,680 (default weights), 746,440 (sensitivity config_3)
 
 ### Problem 3: Order Selection Idea (Undergraduate)
-- **Report**: `outputs/reports/problem3_order_selection_idea.md`
+- **Report**: `outputs/reports/problem3_order_selection_idea.md` (paper-ready)
 - **Script**: `experiments/run_problem3_idea.py`
-- **Recommendation**: H03 (net profit ~279,720), backup H02 (~268,120)
+- **Recommended order**: **H03** (gross profit 330,460, est. net profit 256,440)
+- **Backup order**: **H02** (gross profit 316,320, est. net profit 249,960)
+- **Conservative**: H01 (gross profit 285,620)
+- **H03 theoretical coverage**: 100.7% (total remaining volume / net demand)
+- **H03 effective coverage**: 95.7% (95% × total volume / net demand)
+- **Switch condition**: If H03 emergency purchase ratio exceeds 20%, switch to H02
+- **Outputs**: `problem3_order_scores.csv`, `problem3_order_recommendation.json`
 
 ## Output Files
 
-- **problem1_csv**: `outputs/results/problem1_summary.csv`
-- **problem1_filled**: `outputs/results/result1_filled.xlsx`
-- **problem1_json**: `outputs/results/problem1_solution.json`
-- **problem2_csv**: `outputs/results/problem2_summary.csv`
-- **problem2_filled**: `outputs/results/result2_filled.xlsx`
-- **problem2_json**: `outputs/results/problem2_solution.json`
-- **problem3_scores**: `outputs/results/problem3_order_scores.csv`
-- **problem3_recommendation**: `outputs/results/problem3_order_recommendation.json`
-- **problem3_report**: `outputs/reports/problem3_order_selection_idea.md`
+| File | Description |
+|------|-------------|
+| `outputs/results/problem1_solution.json` | Problem 1 full solution |
+| `outputs/results/problem1_summary.csv` | Problem 1 flat summary |
+| `outputs/results/problem2_solution.json` | Problem 2 full solution (validated, non-empty) |
+| `outputs/results/problem2_summary.csv` | Problem 2 flat summary |
+| `outputs/results/problem2_solution_validation.json` | Problem 2 validation (PASSED) |
+| `outputs/results/problem3_order_scores.csv` | Problem 3 order scoring |
+| `outputs/results/problem3_order_recommendation.json` | Problem 3 recommendation |
+| `outputs/results/result1_filled.xlsx` | Filled template 1 |
+| `outputs/results/result2_filled.xlsx` | Filled template 2 |
+| `outputs/results/excel_validation_report.json` | Cross-validation report |
+| `outputs/reports/problem3_order_selection_idea.md` | Problem 3 paper-ready report |
 
 ## Excel Validation
-- result1: metrics_match_json=true, no errors, no warnings
-- result2: metrics_match_json=true, no errors, no warnings
+- result1: metrics_match_json=true, has_computed_solution=true, no errors, no warnings
+- result2: metrics_match_json=true, has_computed_solution=true, no errors, no warnings
 
 ## Optimality Notes
 
 **IMPORTANT**: CP-SAT solver returning OPTIMAL means the solution is optimal
 WITHIN the generated pattern library, NOT necessarily globally optimal.
 
-For rigorous global optimality claims, see `outputs/reports/optimality_certificate_report.md`.
+- **Problem 1**: L01 (100%) and L03 (100%) fully utilized — provably optimal for those materials. L02 at 96% — empirically best, not rigorously proven.
+- **Problem 2**: 748,640 is the best feasible solution found within the candidate pattern library. The profit density relaxation bound (852,187.5) is a LOOSE upper bound that ignores geometry.
+- **Problem 3**: Recommendation is based on estimated net profit and coverage analysis — not a full CP-SAT solve. Switch condition (20% purchase ratio) provides a risk-management framework.
+
+For detailed optimality discussion, see `outputs/reports/optimality_certificate_report.md`.
 
 ## Figures
 
@@ -72,13 +87,3 @@ For rigorous global optimality claims, see `outputs/reports/optimality_certifica
 | Ablation | `outputs/figures/ablation/` |
 | Sensitivity | `outputs/figures/sensitivity/` |
 | 3D Layouts | `outputs/figures/3d_layouts/` |
-
-## Excel Files
-
-| File | Description |
-|------|-------------|
-| `result1.xlsx` | Original template (preserved) |
-| `result2.xlsx` | Original template (preserved) |
-| `result1_filled.xlsx` | Filled + computed_solution |
-| `result2_filled.xlsx` | Filled + computed_solution |
-| `excel_validation_report.json` | Cross-validation report (both files pass) |

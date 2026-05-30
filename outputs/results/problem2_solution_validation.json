@@ -1,0 +1,61 @@
+{
+  "file": "outputs/results/problem2_solution.json",
+  "exists": true,
+  "file_size_bytes": 1153261,
+  "total_profit": 748640,
+  "total_profit_correct": true,
+  "volume_accounting_correct": true,
+  "all_pieces_ge_10": true,
+  "patterns_non_empty": true,
+  "num_patterns": 208,
+  "num_patterns_used": 7,
+  "geometry_validation": "PASSED",
+  "geometry_details": [
+    {
+      "pattern_id": 13,
+      "valid": true,
+      "msg": "OK"
+    },
+    {
+      "pattern_id": 44,
+      "valid": true,
+      "msg": "OK"
+    },
+    {
+      "pattern_id": 139,
+      "valid": true,
+      "msg": "OK"
+    },
+    {
+      "pattern_id": 187,
+      "valid": true,
+      "msg": "OK"
+    },
+    {
+      "pattern_id": 256,
+      "valid": true,
+      "msg": "OK"
+    },
+    {
+      "pattern_id": 209,
+      "valid": true,
+      "msg": "OK"
+    },
+    {
+      "pattern_id": 179,
+      "valid": true,
+      "msg": "OK"
+    }
+  ],
+  "piece_counts": {
+    "J01": 30,
+    "J02": 30,
+    "J03": 100,
+    "J04": 12,
+    "J05": 14,
+    "J06": 370,
+    "J07": 354
+  },
+  "material_utilization": 0.9614785478547855,
+  "total_waste_volume": 2918000
+}
